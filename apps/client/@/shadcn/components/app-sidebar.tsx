@@ -245,13 +245,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       className="border border-sidebar-border/60 bg-sidebar/70 shadow-xl backdrop-blur"
       {...props}
     >
-      <SidebarHeader className="rounded-lg border border-sidebar-border/60 bg-sidebar/80 p-3 shadow-sm">
+      <SidebarHeader className="rounded-lg border border-sidebar-border/60 bg-sidebar/80 p-3 shadow-sm group-data-[collapsible=icon]:p-2">
         {/* <TeamSwitcher teams={data.teams} /> */}
-        <div className="flex items-center gap-3">
-          <div className="flex aspect-square size-9 items-center justify-center rounded-xl bg-primary/15 text-sidebar-primary-foreground">
+        <div className="flex items-center gap-3 group-data-[collapsible=icon]:justify-center">
+          <div className="flex aspect-square size-9 items-center justify-center rounded-xl bg-primary/15 text-sidebar-primary-foreground group-data-[collapsible=icon]:size-8">
             <img src="/favicon/favicon-32x32.png" className="size-4" />
           </div>
-          <div className="grid flex-1 text-left text-sm leading-tight text-foreground">
+          <div className="grid flex-1 text-left text-sm leading-tight text-foreground group-data-[collapsible=icon]:hidden">
             <span className="truncate text-lg font-semibold text-foreground">
               Peppermint
             </span>

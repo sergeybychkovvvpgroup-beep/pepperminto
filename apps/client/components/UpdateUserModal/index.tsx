@@ -1,5 +1,5 @@
 import { toast } from "@/shadcn/hooks/use-toast";
-import { Dialog, Transition } from "@headlessui/react";
+import { Dialog, DialogBackdrop, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { getCookie } from "cookies-next";
 import { useRouter } from "next/router";
@@ -69,7 +69,7 @@ export default function UpdateUserModal({ user }) {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+              <DialogBackdrop className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
             </Transition.Child>
 
             <span

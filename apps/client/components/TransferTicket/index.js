@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
-import { Dialog, Transition, Listbox } from "@headlessui/react";
+import { Dialog, DialogBackdrop, Transition, Listbox } from "@headlessui/react";
 // import { XIcon } from "@heroicons/react/24/outline";
 import {
   CheckIcon,
@@ -89,7 +89,7 @@ export default function TransferTicket({ id }) {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+              <DialogBackdrop className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
             </Transition.Child>
 
             {/* This element is to trick the browser into centering the modal contents. */}

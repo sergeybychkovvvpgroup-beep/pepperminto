@@ -26,7 +26,7 @@ const fetchAllClients = async () => {
 function DefaultColumnFilter({ column }: any) {
   return (
     <input
-      className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+      className="block w-full rounded-md border border-border/70 bg-background/70 px-3 py-2 text-sm text-foreground shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30"
       type="text"
       value={column.getFilterValue() || ""}
       onChange={(e) => {
@@ -67,9 +67,9 @@ function Table({ columns, data }: any) {
   return (
     <div className="overflow-x-auto md:-mx-6 lg:-mx-8">
       <div className="py-2 align-middle inline-block min-w-full md:px-6 lg:px-8">
-        <div className="shadow overflow-hidden border-b border-gray-200 md:rounded-lg">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
+        <div className="overflow-hidden rounded-lg border border-border/60 bg-card/80 shadow-sm">
+          <table className="min-w-full divide-y divide-border/60">
+            <thead className="bg-muted/40">
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => {
@@ -80,7 +80,7 @@ function Table({ columns, data }: any) {
                     return (
                       <th
                         key={header.id}
-                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider"
                       >
                         {header.isPlaceholder
                           ? null
@@ -101,11 +101,11 @@ function Table({ columns, data }: any) {
             </thead>
             <tbody>
               {table.getRowModel().rows.map((row) => (
-                <tr key={row.id} className="bg-white">
+                <tr key={row.id} className="border-b border-border/60">
                   {row.getVisibleCells().map((cell) => (
                     <td
                       key={cell.id}
-                      className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
+                      className="px-6 py-4 whitespace-nowrap text-sm font-medium text-foreground"
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
@@ -120,18 +120,18 @@ function Table({ columns, data }: any) {
 
           {data.length > 10 && (
             <nav
-              className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
+              className="flex items-center justify-between border-t border-border/60 bg-card/70 px-4 py-3 sm:px-6"
               aria-label="Pagination"
             >
               <div className="hidden sm:block">
                 <div className="flex flex-row flex-nowrap w-full space-x-2">
-                  <p className="block text-sm font-medium text-gray-700 mt-4">
+                  <p className="block text-sm font-medium text-muted-foreground mt-4">
                     Show
                   </p>
                   <select
                     id="location"
                     name="location"
-                    className="block w-full pl-3 pr-10 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                    className="block w-full rounded-md border border-border/70 bg-background/70 pl-3 pr-10 text-base text-foreground shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 sm:text-sm"
                     value={table.getState().pagination.pageSize}
                     onChange={(e) => {
                       table.setPageSize(Number(e.target.value));
@@ -147,7 +147,7 @@ function Table({ columns, data }: any) {
               </div>
               <div className="flex-1 flex justify-between sm:justify-end">
                 <button
-                  className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                  className="relative inline-flex items-center rounded-md border border-border/70 bg-background/70 px-4 py-2 text-sm font-medium text-foreground shadow-sm hover:bg-accent/40 disabled:cursor-not-allowed disabled:opacity-50"
                   type="button"
                   onClick={() => table.previousPage()}
                   disabled={!table.getCanPreviousPage()}
@@ -155,7 +155,7 @@ function Table({ columns, data }: any) {
                   Previous
                 </button>
                 <button
-                  className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                  className="ml-3 relative inline-flex items-center rounded-md border border-border/70 bg-background/70 px-4 py-2 text-sm font-medium text-foreground shadow-sm hover:bg-accent/40 disabled:cursor-not-allowed disabled:opacity-50"
                   type="button"
                   onClick={() => table.nextPage()}
                   disabled={!table.getCanNextPage()}
@@ -214,7 +214,7 @@ export default function Clients() {
             <ClientNotesModal notes={row.original.notes} id={row.original.id} /> */}
               <button
                 type="button"
-                className="rounded bg-white hover:bg-red-100 px-2.5 py-1.5 text-xs font-semibold text-red-600 hover:text-white shadow-sm ring-1 ring-inset ring-gray-300"
+                className="rounded-md border border-destructive/50 bg-background/70 px-2.5 py-1.5 text-xs font-semibold text-destructive shadow-sm hover:bg-destructive/10"
                 onClick={() => deleteClient(row.original.id)}
               >
                 Delete

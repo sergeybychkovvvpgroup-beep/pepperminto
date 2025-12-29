@@ -49,7 +49,7 @@ export default function ShadLayout({ children }: any) {
                   <div className="hidden w-full items-center justify-start space-x-6 sm:flex">
                     {user.isAdmin && (
                       <Link href="https://github.com/Peppermint-Lab/peppermint/releases">
-                        <span className="inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+                        <span className="inline-flex items-center rounded-md border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
                           Version {process.env.NEXT_PUBLIC_CLIENT_VERSION}
                         </span>
                       </Link>
@@ -62,7 +62,7 @@ export default function ShadLayout({ children }: any) {
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="relative h-9 w-9 rounded-full border border-border/60 bg-background/70 text-muted-foreground shadow-sm backdrop-blur transition hover:bg-accent/50 hover:text-foreground"
+                      className="relative h-9 w-9 rounded-md border border-border/60 bg-background/70 text-muted-foreground shadow-sm backdrop-blur transition hover:bg-accent/50 hover:text-foreground"
                       asChild
                     >
                       <Link href="/notifications">

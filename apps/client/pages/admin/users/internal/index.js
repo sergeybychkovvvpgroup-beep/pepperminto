@@ -68,9 +68,9 @@ function Table({ columns, data }) {
   return (
     <div className="overflow-x-auto md:-mx-6 lg:-mx-8">
       <div className="py-2 align-middle inline-block min-w-full md:px-6 lg:px-8">
-        <div className="shadow overflow-hidden border-b border-gray-200 md:rounded-lg">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
+        <div className="overflow-hidden rounded-lg border border-border/60 bg-card/80 shadow-sm">
+          <table className="min-w-full divide-y divide-border/60">
+            <thead className="bg-muted/40">
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => {
@@ -81,7 +81,7 @@ function Table({ columns, data }) {
                     return (
                       <th
                         key={header.id}
-                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider"
                       >
                         {header.isPlaceholder
                           ? null
@@ -102,11 +102,11 @@ function Table({ columns, data }) {
             </thead>
             <tbody>
               {table.getRowModel().rows.map((row) => (
-                <tr key={row.id} className="bg-white">
+                <tr key={row.id} className="border-b border-border/60">
                   {row.getVisibleCells().map((cell) => (
                     <td
                       key={cell.id}
-                      className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"
+                      className="px-6 py-4 whitespace-nowrap text-sm font-medium text-foreground"
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
@@ -121,21 +121,21 @@ function Table({ columns, data }) {
 
           {data.legnth > 10 && (
             <nav
-              className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
+              className="flex items-center justify-between border-t border-border/60 bg-card/70 px-4 py-3 sm:px-6"
               aria-label="Pagination"
             >
               <div className="hidden sm:block">
                 <div className="flex flex-row flex-nowrap w-full space-x-2">
                   <p
                     htmlFor="location"
-                    className="block text-sm font-medium text-gray-700 mt-4"
+                    className="block text-sm font-medium text-muted-foreground mt-4"
                   >
                     Show
                   </p>
                   <select
                     id="location"
                     name="location"
-                    className="block w-full pl-3 pr-10 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                    className="block w-full rounded-md border border-border/70 bg-background/70 pl-3 pr-10 text-base text-foreground shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 sm:text-sm"
                     value={table.getState().pagination.pageSize}
                     onChange={(e) => {
                       table.setPageSize(Number(e.target.value));
@@ -151,7 +151,7 @@ function Table({ columns, data }) {
               </div>
               <div className="flex-1 flex justify-between sm:justify-end">
                 <button
-                  className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                  className="relative inline-flex items-center rounded-md border border-border/70 bg-background/70 px-4 py-2 text-sm font-medium text-foreground shadow-sm hover:bg-accent/40 disabled:cursor-not-allowed disabled:opacity-50"
                   type="button"
                   onClick={() => table.previousPage()}
                   disabled={!table.getCanPreviousPage()}
@@ -159,7 +159,7 @@ function Table({ columns, data }) {
                   Previous
                 </button>
                 <button
-                  className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                  className="ml-3 relative inline-flex items-center rounded-md border border-border/70 bg-background/70 px-4 py-2 text-sm font-medium text-foreground shadow-sm hover:bg-accent/40 disabled:cursor-not-allowed disabled:opacity-50"
                   type="button"
                   onClick={() => table.nextPage()}
                   disabled={!table.getCanNextPage()}

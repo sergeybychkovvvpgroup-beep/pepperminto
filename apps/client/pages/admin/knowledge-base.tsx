@@ -123,7 +123,7 @@ export default function KnowledgeBaseAdmin() {
             {mode === "list" ? (
               <button
                 onClick={() => setMode("edit")}
-                className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90"
+                className="rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90"
               >
                 New Article
               </button>
@@ -133,7 +133,7 @@ export default function KnowledgeBaseAdmin() {
                   setMode("list");
                   resetForm();
                 }}
-                className="rounded-full border border-border/70 bg-background/70 px-4 py-2 text-sm font-semibold text-foreground shadow-sm backdrop-blur hover:bg-accent/50"
+                className="rounded-md border border-border/70 bg-background/70 px-4 py-2 text-sm font-semibold text-foreground shadow-sm backdrop-blur hover:bg-accent/50"
               >
                 Back to list
               </button>
@@ -168,13 +168,13 @@ export default function KnowledgeBaseAdmin() {
                   <div className="flex gap-2">
                     <button
                       onClick={() => editArticle(article)}
-                      className="rounded-full bg-foreground px-4 py-2 text-sm font-semibold text-background"
+                      className="rounded-md bg-foreground px-4 py-2 text-sm font-semibold text-background"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => deleteArticle(article.id)}
-                      className="rounded-full border border-destructive/60 px-4 py-2 text-sm font-semibold text-destructive hover:bg-destructive/10"
+                      className="rounded-md border border-destructive/60 px-4 py-2 text-sm font-semibold text-destructive hover:bg-destructive/10"
                     >
                       Delete
                     </button>
@@ -262,7 +262,7 @@ export default function KnowledgeBaseAdmin() {
               <div className="flex gap-3">
                 <button
                   onClick={saveArticle}
-                  className="rounded-full bg-primary px-6 py-2 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90"
+                  className="rounded-md bg-primary px-6 py-2 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90"
                 >
                   {activeId ? "Update Article" : "Create Article"}
                 </button>
@@ -271,7 +271,7 @@ export default function KnowledgeBaseAdmin() {
                     setMode("list");
                     resetForm();
                   }}
-                  className="rounded-full border border-border/70 px-6 py-2 text-sm font-semibold text-foreground shadow-sm hover:bg-accent/40"
+                  className="rounded-md border border-border/70 px-6 py-2 text-sm font-semibold text-foreground shadow-sm hover:bg-accent/40"
                 >
                   Cancel
                 </button>
