@@ -23,7 +23,6 @@ import useTranslation from "next-translate/useTranslation";
 import Link from "next/link";
 import { Fragment, useState } from "react";
 import { AccountDropdown } from "../components/AccountDropdown";
-import ThemeSettings from "../components/ThemeSettings";
 import { useUser } from "../store/session";
 
 export default function AdminLayout({ children }: any) {
@@ -255,7 +254,6 @@ export default function AdminLayout({ children }: any) {
                     </ul>
                   </li>
                 </ul>
-                <ThemeSettings />
               </nav>
             </div>
           </div>

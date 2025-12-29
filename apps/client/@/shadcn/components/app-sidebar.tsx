@@ -21,7 +21,6 @@ import useTranslation from "next-translate/useTranslation";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import CreateTicketModal from "../../../components/CreateTicketModal";
-import ThemeSettings from "../../../components/ThemeSettings";
 import { useUser } from "../../../store/session";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -197,11 +196,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         />
         <NavMain items={data.navMain} />
       </SidebarContent>
-      <SidebarFooter>
-        <div className="hidden sm:block ">
-          <ThemeSettings />
-        </div>
-      </SidebarFooter>
+      <SidebarFooter />
       <SidebarRail />
     </Sidebar>
   );

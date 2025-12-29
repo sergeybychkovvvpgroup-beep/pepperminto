@@ -26,7 +26,6 @@ import {
   Settings,
   SquareKanban,
 } from "lucide-react";
-import ThemeSettings from "../components/ThemeSettings";
 import { useUser } from "../store/session";
 
 export default function NewLayout({ children }: any) {
@@ -307,7 +306,6 @@ export default function NewLayout({ children }: any) {
                           </ul>
                         </li>
                       </ul>
-                      <ThemeSettings />
                     </nav>
                   </div>
                 </Dialog.Panel>
@@ -457,7 +455,6 @@ export default function NewLayout({ children }: any) {
                   </ul>
                 </li>
               </ul>
-              <ThemeSettings />
             </nav>
           </div>
         </div>

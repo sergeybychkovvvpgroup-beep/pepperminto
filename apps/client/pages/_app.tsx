@@ -2,7 +2,6 @@
 import "@radix-ui/themes/styles.css";
 import "../styles/globals.css";
 
-import { ThemeProvider } from "next-themes";
 
 import {
   DocumentCheckIcon,
@@ -54,28 +53,26 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: any) {
 
   if (router.asPath.slice(0, 5) === "/auth") {
     return (
-      <ThemeProvider attribute="class" defaultTheme="light">
+      <>
         <Component {...pageProps} />
         <Toaster />
-      </ThemeProvider>
+      </>
     );
   }
 
   if (router.pathname.includes("/admin")) {
     return (
       <SessionProvider>
-        <ThemeProvider attribute="class" defaultTheme="light">
-          <Theme>
-            <QueryClientProvider client={queryClient}>
-              <Auth>
-                <AdminLayout>
-                  <Component {...pageProps} />
-                  <Toaster />
-                </AdminLayout>
-              </Auth>
-            </QueryClientProvider>
-          </Theme>
-        </ThemeProvider>
+        <Theme>
+          <QueryClientProvider client={queryClient}>
+            <Auth>
+              <AdminLayout>
+                <Component {...pageProps} />
+                <Toaster />
+              </AdminLayout>
+            </Auth>
+          </QueryClientProvider>
+        </Theme>
       </SessionProvider>
     );
   }
@@ -83,20 +80,18 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: any) {
   if (router.pathname.includes("/settings")) {
     return (
       <SessionProvider>
-        <ThemeProvider attribute="class" defaultTheme="light">
-          <Theme>
-            <QueryClientProvider client={queryClient}>
-              <Auth>
-                <ShadLayout>
-                  <Settings>
-                    <Component {...pageProps} />
-                    <Toaster />
-                  </Settings>
-                </ShadLayout>
-              </Auth>
-            </QueryClientProvider>
-          </Theme>
-        </ThemeProvider>
+        <Theme>
+          <QueryClientProvider client={queryClient}>
+            <Auth>
+              <ShadLayout>
+                <Settings>
+                  <Component {...pageProps} />
+                  <Toaster />
+                </Settings>
+              </ShadLayout>
+            </Auth>
+          </QueryClientProvider>
+        </Theme>
       </SessionProvider>
     );
   }
@@ -138,18 +133,16 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: any) {
 
   return (
     <SessionProvider>
-      <ThemeProvider attribute="class" defaultTheme="light">
-        <Theme>
-          <QueryClientProvider client={queryClient}>
-            <Auth>
-              <ShadLayout>
-                <Component {...pageProps} />
-                <Toaster />
-                </ShadLayout>
-            </Auth>
-          </QueryClientProvider>
-        </Theme>
-      </ThemeProvider>
+      <Theme>
+        <QueryClientProvider client={queryClient}>
+          <Auth>
+            <ShadLayout>
+              <Component {...pageProps} />
+              <Toaster />
+            </ShadLayout>
+          </Auth>
+        </QueryClientProvider>
+      </Theme>
     </SessionProvider>
   );
 }
