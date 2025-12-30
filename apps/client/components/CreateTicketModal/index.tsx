@@ -198,7 +198,7 @@ export default function CreateTicketModal({ keypress, setKeyPressDown }) {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <DialogBackdrop className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+              <DialogBackdrop className="fixed inset-0 z-40 bg-gray-500 bg-opacity-75 transition-opacity" />
             </Transition.Child>
 
             {/* This element is to trick the browser into centering the modal contents. */}
@@ -217,7 +217,7 @@ export default function CreateTicketModal({ keypress, setKeyPressDown }) {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <div className="inline-block bg-background rounded-lg px-4 pt-5 pb-4 text-left shadow-xl transform transition-all sm:my-8 align-middle md:max-w-3xl w-full ">
+              <div className="relative z-50 inline-block bg-background rounded-lg px-4 pt-5 pb-4 text-left shadow-xl transform transition-all sm:my-8 align-middle md:max-w-3xl w-full ">
                 <div className="flex flex-row w-full align-middle">
                   <span className="text-md pb-2 font-semibold text-sm">
                     New Issue
