@@ -1,6 +1,11 @@
 import { getCookie } from "cookies-next";
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Button } from "@/shadcn/ui/button";
+import { Checkbox } from "@/shadcn/ui/checkbox";
+import { Input } from "@/shadcn/ui/input";
+import { Label } from "@/shadcn/ui/label";
+import { Textarea } from "@/shadcn/ui/textarea";
 
 async function getArticles() {
   const res = await fetch(`/api/v1/knowledge-base/all`, {
@@ -121,22 +126,21 @@ export default function KnowledgeBaseAdmin() {
           </div>
           <div className="flex gap-2">
             {mode === "list" ? (
-              <button
+              <Button
                 onClick={() => setMode("edit")}
-                className="rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90"
               >
                 New Article
-              </button>
+              </Button>
             ) : (
-              <button
+              <Button
                 onClick={() => {
                   setMode("list");
                   resetForm();
                 }}
-                className="rounded-md border border-border/70 bg-background/70 px-4 py-2 text-sm font-semibold text-foreground shadow-sm backdrop-blur hover:bg-accent/50"
+                variant="outline"
               >
                 Back to list
-              </button>
+              </Button>
             )}
           </div>
         </div>
@@ -166,18 +170,17 @@ export default function KnowledgeBaseAdmin() {
                     </p>
                   </div>
                   <div className="flex gap-2">
-                    <button
+                    <Button
                       onClick={() => editArticle(article)}
-                      className="rounded-md bg-foreground px-4 py-2 text-sm font-semibold text-background"
                     >
                       Edit
-                    </button>
-                    <button
+                    </Button>
+                    <Button
                       onClick={() => deleteArticle(article.id)}
-                      className="rounded-md border border-destructive/60 px-4 py-2 text-sm font-semibold text-destructive hover:bg-destructive/10"
+                      variant="destructive"
                     >
                       Delete
-                    </button>
+                    </Button>
                   </div>
                 </div>
               ))
@@ -189,92 +192,89 @@ export default function KnowledgeBaseAdmin() {
           <div className="mt-8 rounded-2xl border border-border/60 bg-card/80 p-6 shadow-sm backdrop-blur">
             <div className="grid gap-6">
               <div>
-                <label className="block text-sm font-medium text-foreground">
+                <Label className="text-sm text-foreground">
                   Title
-                </label>
-                <input
+                </Label>
+                <Input
                   value={title}
                   onChange={(event) => setTitle(event.target.value)}
-                  className="mt-2 w-full rounded-md border border-border/70 bg-background/70 px-3 py-2 text-sm text-foreground shadow-sm backdrop-blur focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30"
+                  className="mt-2 bg-background/60"
                   placeholder="New article title"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-foreground">
+                <Label className="text-sm text-foreground">
                   Slug
-                </label>
-                <input
+                </Label>
+                <Input
                   value={slug}
                   onChange={(event) => setSlug(event.target.value)}
-                  className="mt-2 w-full rounded-md border border-border/70 bg-background/70 px-3 py-2 text-sm text-foreground shadow-sm backdrop-blur focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30"
+                  className="mt-2 bg-background/60"
                   placeholder="optional-custom-slug"
                 />
               </div>
 
               <div className="grid gap-6 md:grid-cols-2">
                 <div>
-                  <label className="block text-sm font-medium text-foreground">
+                  <Label className="text-sm text-foreground">
                     Author
-                  </label>
-                  <input
+                  </Label>
+                  <Input
                     value={author}
                     onChange={(event) => setAuthor(event.target.value)}
-                    className="mt-2 w-full rounded-md border border-border/70 bg-background/70 px-3 py-2 text-sm text-foreground shadow-sm backdrop-blur focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30"
+                    className="mt-2 bg-background/60"
                     placeholder="Author name"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-foreground">
+                  <Label className="text-sm text-foreground">
                     Tags (CSV)
-                  </label>
-                  <input
+                  </Label>
+                  <Input
                     value={tags}
                     onChange={(event) => setTags(event.target.value)}
-                    className="mt-2 w-full rounded-md border border-border/70 bg-background/70 px-3 py-2 text-sm text-foreground shadow-sm backdrop-blur focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30"
+                    className="mt-2 bg-background/60"
                     placeholder="install, email, sso"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-foreground">
+                <Label className="text-sm text-foreground">
                   Body
-                </label>
-                <textarea
+                </Label>
+                <Textarea
                   value={body}
                   onChange={(event) => setBody(event.target.value)}
-                  className="mt-2 h-48 w-full rounded-md border border-border/70 bg-background/70 px-3 py-2 text-sm text-foreground shadow-sm backdrop-blur focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30"
+                  className="mt-2 h-48 bg-background/60"
                   placeholder="Write the article content here..."
                 />
               </div>
 
-              <label className="inline-flex items-center gap-3 text-sm text-muted-foreground">
-                <input
-                  type="checkbox"
+              <Label className="inline-flex items-center gap-3 text-sm text-muted-foreground">
+                <Checkbox
                   checked={published}
-                  onChange={(event) => setPublished(event.target.checked)}
-                  className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
+                  onCheckedChange={(checked) => setPublished(Boolean(checked))}
                 />
                 Publish immediately
-              </label>
+              </Label>
 
               <div className="flex gap-3">
-                <button
+                <Button
                   onClick={saveArticle}
-                  className="rounded-md bg-primary px-6 py-2 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90"
                 >
                   {activeId ? "Update Article" : "Create Article"}
-                </button>
-                <button
+                </Button>
+                <Button
                   onClick={() => {
                     setMode("list");
                     resetForm();
                   }}
-                  className="rounded-md border border-border/70 px-6 py-2 text-sm font-semibold text-foreground shadow-sm hover:bg-accent/40"
+                  variant="outline"
                 >
                   Cancel
-                </button>
+                </Button>
               </div>
             </div>
           </div>

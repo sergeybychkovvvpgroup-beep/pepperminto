@@ -540,7 +540,7 @@ export default function Tickets() {
                   <ContextMenu>
                     <ContextMenuTrigger>
                       <Link href={`/issue/${ticket.id}`}>
-                        <div className="flex flex-row w-full bg-white dark:bg-[#0A090C] dark:hover:bg-green-600 border-b-[1px] p-1.5 justify-between px-6 hover:bg-gray-100">
+                        <div className="flex flex-row w-full bg-card/80 border-b border-border/60 p-1.5 justify-between px-6 hover:bg-accent/40">
                           <div className="flex flex-row items-center space-x-4">
                             <span className="text-xs font-semibold">
                               #{ticket.Number}
@@ -760,14 +760,14 @@ export default function Tickets() {
               <div className="min-h-screen flex items-center justify-center">
                 <button
                   type="button"
-                  className="relative block w-[400px] rounded-lg border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  className="relative block w-[400px] rounded-lg border-2 border-dashed border-border/60 p-12 text-center hover:border-border focus:outline-none focus:ring-2 focus:ring-primary/30"
                   onClick={() => {
                     const event = new KeyboardEvent("keydown", { key: "c" });
                     document.dispatchEvent(event);
                   }}
                 >
                   <svg
-                    className="mx-auto h-12 w-12 text-gray-400"
+                    className="mx-auto h-12 w-12 text-muted-foreground"
                     stroke="currentColor"
                     fill="none"
                     viewBox="0 0 48 48"
@@ -780,7 +780,7 @@ export default function Tickets() {
                       d="M8 14v20c0 4.418 7.163 8 16 8 1.381 0 2.721-.087 4-.252M8 14c0 4.418 7.163 8 16 8s16-3.582 16-8M8 14c0-4.418 7.163-8 16-8s16 3.582 16 8m0 0v14m0-4c0 4.418-7.163 8-16 8S8 28.418 8 24m32 10v6m0 0v6m0-6h6m-6 0h-6"
                     />
                   </svg>
-                  <span className="mt-2 block text-sm font-semibold text-gray-900">
+                  <span className="mt-2 block text-sm font-semibold text-foreground">
                     Create your first issue
                   </span>
                 </button>

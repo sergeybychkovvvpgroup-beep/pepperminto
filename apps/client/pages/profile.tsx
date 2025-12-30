@@ -10,6 +10,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shadcn/ui/card";
+import { Button } from "@/shadcn/ui/button";
+import { Input } from "@/shadcn/ui/input";
+import { Label } from "@/shadcn/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/shadcn/ui/select";
 
 import { useUser } from "../store/session";
 
@@ -59,16 +69,16 @@ export default function UserProfile() {
           <div className="mt-6 flex flex-col lg:flex-row">
             <div className="flex-grow space-y-6">
               <div>
-                <label className="block text-sm font-medium text-foreground">
+                <Label className="text-sm text-foreground">
                   {t("name")}
-                </label>
-                <div className="mt-1 rounded-md shadow-sm flex">
-                  <input
+                </Label>
+                <div className="mt-2">
+                  <Input
                     type="text"
                     name="name"
                     id="name"
                     autoComplete="name"
-                    className="text-foreground bg-background flex-grow block w-full min-w-0 rounded-md sm:text-sm border-gray-300"
+                    className="bg-background/60"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                   />
@@ -76,65 +86,63 @@ export default function UserProfile() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-foreground">
+                <Label className="text-sm text-foreground">
                   {t("email")}
-                </label>
-                <div className="mt-1 rounded-md shadow-sm flex">
-                  <input
+                </Label>
+                <div className="mt-2">
+                  <Input
                     type="email"
                     name="email"
                     autoComplete="email"
-                    className="text-foreground bg-background flex-grow block w-full min-w-0 rounded-md sm:text-sm border-gray-300"
+                    className="bg-background/60"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-foreground">
+                <Label className="text-sm text-foreground">
                   {t("language")}
-                </label>
-                <div className="mt-1 rounded-md shadow-sm flex">
-                  <select
-                    id="language"
-                    name="language"
-                    className="text-foreground bg-background flex-grow block w-full min-w-0 rounded-md sm:text-sm border-gray-300"
-                    value={language}
-                    onChange={(e) => changeLanguage(e.target.value)}
-                  >
-                    <option value="en">English</option>
-                    <option value="de">German</option>
-                    <option value="se">Swedish</option>
-                    <option value="es">Spanish</option>
-                    <option value="no">Norwegian</option>
-                    <option value="fr">French</option>
-                    <option value="tl">Tagalong</option>
-                    <option value="da">Danish</option>
-                    <option value="pt">Portuguese</option>
-                    <option value="it">Italiano</option>
-                    <option value="he">Hebrew</option>
-                    <option value="tr">Turkish</option>
-                    <option value="hu">Hungarian</option>
-                    <option value="th">Thai (ภาษาไทย)</option>
-                    <option value="zh-CN">Simplified Chinese (简体中文)</option>
-                  </select>
-                </div>
+                </Label>
+                <Select value={language} onValueChange={changeLanguage}>
+                  <SelectTrigger className="mt-2 bg-background/60">
+                    <SelectValue placeholder={t("language")} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="en">English</SelectItem>
+                    <SelectItem value="de">German</SelectItem>
+                    <SelectItem value="se">Swedish</SelectItem>
+                    <SelectItem value="es">Spanish</SelectItem>
+                    <SelectItem value="no">Norwegian</SelectItem>
+                    <SelectItem value="fr">French</SelectItem>
+                    <SelectItem value="tl">Tagalong</SelectItem>
+                    <SelectItem value="da">Danish</SelectItem>
+                    <SelectItem value="pt">Portuguese</SelectItem>
+                    <SelectItem value="it">Italiano</SelectItem>
+                    <SelectItem value="he">Hebrew</SelectItem>
+                    <SelectItem value="tr">Turkish</SelectItem>
+                    <SelectItem value="hu">Hungarian</SelectItem>
+                    <SelectItem value="th">Thai (ภาษาไทย)</SelectItem>
+                    <SelectItem value="zh-CN">
+                      Simplified Chinese (简体中文)
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
           </div>
         </CardContent>
         <CardFooter>
           <div className="flex w-full justify-end">
-            <button
+            <Button
               onClick={async () => {
                 await updateProfile();
                 router.reload();
               }}
               type="submit"
-              className="inline-flex items-center px-4 py-2 border font-semibold border-gray-300 shadow-sm text-xs rounded text-gray-700 bg-white hover:bg-gray-50 "
             >
               {t("save_and_reload")}
-            </button>
+            </Button>
           </div>
         </CardFooter>
       </Card>

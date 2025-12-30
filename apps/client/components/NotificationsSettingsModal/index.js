@@ -2,6 +2,9 @@ import React, { useState, useEffect, Fragment, useRef } from "react";
 import { Dialog, DialogBackdrop, Transition, Listbox } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/solid";
 import useTranslation from "next-translate/useTranslation";
+import { Button } from "@/shadcn/ui/button";
+import { Input } from "@/shadcn/ui/input";
+import { Label } from "@/shadcn/ui/label";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -103,96 +106,83 @@ export default function NotificationsSettingsModal() {
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full sm:p-6">
-                <div className="flex flex-row w-full border-b border-gray-300">
+                <div className="flex flex-row w-full border-b border-border/60">
                   <span className="text-md pb-2 font-bold">Email Settings</span>
 
-                  <button
+                  <Button
                     type="button"
-                    className="ml-auto mb-1.5 bg-white text-xs rounded-md text-gray-400 hover:text-gray-500 "
+                    variant="ghost"
+                    size="icon"
+                    className="ml-auto mb-1.5"
                     onClick={() => setOpen(false)}
                   >
                     <span className="sr-only">Close</span>
                     <XIcon className="h-4 w-4" aria-hidden="true" />
-                  </button>
+                  </Button>
                 </div>
 
                 <div className="space-y-1 mt-4 mb-4">
-                  <label
-                    htmlFor="smtp"
-                    className="block text-sm font-medium text-gray-700"
-                  >
+                  <Label htmlFor="smtp" className="text-sm text-foreground">
                     SMTP Host
-                  </label>
+                  </Label>
                   <div className="mt-1">
-                    <input
+                    <Input
                       type="text"
                       name="smtp"
                       id="smtp"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="bg-background/60"
                       placeholder=""
                       onChange={(e) => setHost(e.target.value)}
                     />
                   </div>
-                  <label
-                    htmlFor="reply"
-                    className="block text-sm font-medium text-gray-700"
-                  >
+                  <Label htmlFor="reply" className="text-sm text-foreground">
                     Reply From
-                  </label>
+                  </Label>
                   <div className="mt-1">
-                    <input
+                    <Input
                       type="email"
                       name="reply"
                       id="reply"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="bg-background/60"
                       placeholder="noreply@peppermint.sh"
                       onChange={(e) => setReply(e.target.value)}
                     />
                   </div>
-                  <label
-                    htmlFor="port"
-                    className="block text-sm font-medium text-gray-700"
-                  >
+                  <Label htmlFor="port" className="text-sm text-foreground">
                     Port
-                  </label>
+                  </Label>
                   <div className="mt-1">
-                    <input
+                    <Input
                       type="text"
                       name="port"
                       id="port"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="bg-background/60"
                       placeholder="403"
                       onChange={(e) => setPort(e.target.value)}
                     />
                   </div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-gray-700"
-                  >
+                  <Label htmlFor="email" className="text-sm text-foreground">
                     Username
-                  </label>
+                  </Label>
                   <div className="mt-1">
-                    <input
+                    <Input
                       type="email"
                       name="email"
                       id="email"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="bg-background/60"
                       placeholder=""
                       onChange={(e) => setUsername(e.target.value)}
                     />
                   </div>
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-medium text-gray-700"
-                  >
+                  <Label htmlFor="password" className="text-sm text-foreground">
                     Password
-                  </label>
+                  </Label>
                   <div className="mt-1">
-                    <input
+                    <Input
                       type="password"
                       name="password"
                       id="password"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="bg-background/60"
                       placeholder=""
                       onChange={(e) => setPassword(e.target.value)}
                     />
@@ -200,17 +190,16 @@ export default function NotificationsSettingsModal() {
                 </div>
 
                 <div className="mt-2">
-                  <div className="border-t border-gray-300 ">
+                  <div className="border-t border-border/60 ">
                     <div className="mt-2 float-right">
-                      <button
+                      <Button
                         onClick={() => {
                           postData();
                         }}
                         type="button"
-                        className="inline-flex justify-center rounded-md shadow-sm px-2.5 py-1.5 border border-transparent text-xs bg-green-600 font-medium text-white hover:bg-green-700 focus:outline-none "
                       >
                         Save
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 </div>

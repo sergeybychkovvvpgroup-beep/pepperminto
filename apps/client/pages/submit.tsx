@@ -6,14 +6,23 @@
 // Send Email to Engineers with ticket creation if email notifications are turned on
 
 import { toast } from "@/shadcn/hooks/use-toast";
-import { Listbox, Transition } from "@headlessui/react";
+import { Button } from "@/shadcn/ui/button";
+import { Card } from "@/shadcn/ui/card";
+import { Input } from "@/shadcn/ui/input";
+import { Label } from "@/shadcn/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/shadcn/ui/select";
+import { Textarea } from "@/shadcn/ui/textarea";
 import {
   CheckCircleIcon,
-  CheckIcon,
-  ChevronUpDownIcon,
 } from "@heroicons/react/20/solid";
 import { useRouter } from "next/router";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 
 const type = [
   { id: 5, name: "Incident" },
@@ -32,21 +41,17 @@ const pri = [
 ];
 
 export default function ClientTicketNew() {
-  function classNames(...classes) {
-    return classes.filter(Boolean).join(" ");
-  }
-
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [view, setView] = useState("new");
   const [ticketID, setTicketID] = useState("");
 
-  const [selected, setSelected] = useState(type[2]);
+  const [selectedType, setSelectedType] = useState(type[2].name);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [description, setDescription] = useState("");
-  const [priority, setPriority] = useState(pri[0]);
+  const [priority, setPriority] = useState(pri[0].name);
 
   async function submitTicket() {
     setIsLoading(true);
@@ -61,8 +66,8 @@ export default function ClientTicketNew() {
         company: router.query.id,
         email,
         detail: description,
-        priority: priority.name,
-        type: selected.name,
+        priority,
+        type: selectedType,
       }),
     })
       .then((res) => res.json())
@@ -88,29 +93,26 @@ export default function ClientTicketNew() {
   }
 
   return (
-    <div className="flex justify-center items-center content-center h-screen bg-gray-900">
+    <div className="flex justify-center items-center content-center min-h-screen bg-background">
       {view === "new" ? (
-        <div className="max-w-2xl bg-white p-12 rounded-md">
-          <h1 className="font-bold text-2xl">Submit a Ticket</h1>
-          <span>
+        <Card className="max-w-2xl w-full border-border/60 bg-card/80 p-10 shadow-lg backdrop-blur">
+          <h1 className="font-bold text-2xl text-foreground">Submit a Ticket</h1>
+          <span className="text-sm text-muted-foreground">
             Need help? Submit a ticket and our support team will get back to you
             as soon as possible.
           </span>
 
-          <div className="my-4 flex flex-col space-y-4">
+          <div className="my-6 flex flex-col space-y-4">
             <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
+              <Label htmlFor="name" className="text-sm text-foreground">
                 Name
-              </label>
+              </Label>
               <div className="mt-2">
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
+                <Input
+                  type="text"
+                  name="name"
+                  id="name"
+                  className="bg-background/60"
                   placeholder="John Doe"
                   onChange={(e) => setName(e.target.value)}
                   value={name}
@@ -119,18 +121,15 @@ export default function ClientTicketNew() {
               </div>
             </div>
             <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
+              <Label htmlFor="email" className="text-sm text-foreground">
                 Email
-              </label>
+              </Label>
               <div className="mt-2">
-                <input
+                <Input
                   type="email"
                   name="email"
                   id="email"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
+                  className="bg-background/60"
                   placeholder="johnD@meta.com"
                   onChange={(e) => setEmail(e.target.value)}
                   value={email}
@@ -139,18 +138,15 @@ export default function ClientTicketNew() {
               </div>
             </div>
             <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
+              <Label htmlFor="subject" className="text-sm text-foreground">
                 Subject
-              </label>
+              </Label>
               <div className="mt-2">
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
+                <Input
+                  type="text"
+                  name="subject"
+                  id="subject"
+                  className="bg-background/60"
                   placeholder="I can't login to my account"
                   onChange={(e) => setSubject(e.target.value)}
                   value={subject}
@@ -158,165 +154,48 @@ export default function ClientTicketNew() {
               </div>
             </div>
 
-            <Listbox value={selected} onChange={setSelected}>
-              {({ open }) => (
-                <>
-                  <Listbox.Label className="block text-sm font-medium leading-6 text-gray-900">
-                    Issue Type
-                  </Listbox.Label>
-                  <div className="relative mt-2">
-                    <Listbox.Button className="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none sm:text-sm sm:leading-6">
-                      <span className="block truncate">{selected.name}</span>
-                      <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                        <ChevronUpDownIcon
-                          className="h-5 w-5 text-gray-400"
-                          aria-hidden="true"
-                        />
-                      </span>
-                    </Listbox.Button>
-
-                    <Transition
-                      show={open}
-                      as={Fragment}
-                      leave="transition ease-in duration-100"
-                      leaveFrom="opacity-100"
-                      leaveTo="opacity-0"
-                    >
-                      <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                        {type.map((person) => (
-                          <Listbox.Option
-                            key={person.id}
-                            className={({ active }) =>
-                              classNames(
-                                active
-                                  ? "bg-gray-400 text-white"
-                                  : "text-gray-900",
-                                "relative cursor-default select-none py-2 pl-3 pr-9"
-                              )
-                            }
-                            value={person}
-                          >
-                            {({ selected, active }) => (
-                              <>
-                                <span
-                                  className={classNames(
-                                    selected ? "font-semibold" : "font-normal",
-                                    "block truncate"
-                                  )}
-                                >
-                                  {person.name}
-                                </span>
-
-                                {selected ? (
-                                  <span
-                                    className={classNames(
-                                      active ? "text-white" : "text-indigo-600",
-                                      "absolute inset-y-0 right-0 flex items-center pr-4"
-                                    )}
-                                  >
-                                    <CheckIcon
-                                      className="h-5 w-5"
-                                      aria-hidden="true"
-                                    />
-                                  </span>
-                                ) : null}
-                              </>
-                            )}
-                          </Listbox.Option>
-                        ))}
-                      </Listbox.Options>
-                    </Transition>
-                  </div>
-                </>
-              )}
-            </Listbox>
-
-            <Listbox value={priority} onChange={setPriority}>
-              {({ open }) => (
-                <>
-                  <Listbox.Label className="block text-sm font-medium leading-6 text-gray-900">
-                    Priority
-                  </Listbox.Label>
-                  <div className="relative mt-2">
-                    <Listbox.Button className="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none sm:text-sm sm:leading-6">
-                      <span className="block truncate">{priority.name}</span>
-                      <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                        <ChevronUpDownIcon
-                          className="h-5 w-5 text-gray-400"
-                          aria-hidden="true"
-                        />
-                      </span>
-                    </Listbox.Button>
-
-                    <Transition
-                      show={open}
-                      as={Fragment}
-                      leave="transition ease-in duration-100"
-                      leaveFrom="opacity-100"
-                      leaveTo="opacity-0"
-                    >
-                      <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                        {pri.map((person) => (
-                          <Listbox.Option
-                            key={person.id}
-                            className={({ active }) =>
-                              classNames(
-                                active
-                                  ? "bg-gray-400 text-white"
-                                  : "text-gray-900",
-                                "relative cursor-default select-none py-2 pl-3 pr-9"
-                              )
-                            }
-                            value={person}
-                          >
-                            {({ selected, active }) => (
-                              <>
-                                <span
-                                  className={classNames(
-                                    selected ? "font-semibold" : "font-normal",
-                                    "block truncate"
-                                  )}
-                                >
-                                  {person.name}
-                                </span>
-
-                                {selected ? (
-                                  <span
-                                    className={classNames(
-                                      active ? "text-white" : "text-indigo-600",
-                                      "absolute inset-y-0 right-0 flex items-center pr-4"
-                                    )}
-                                  >
-                                    <CheckIcon
-                                      className="h-5 w-5"
-                                      aria-hidden="true"
-                                    />
-                                  </span>
-                                ) : null}
-                              </>
-                            )}
-                          </Listbox.Option>
-                        ))}
-                      </Listbox.Options>
-                    </Transition>
-                  </div>
-                </>
-              )}
-            </Listbox>
+            <div>
+              <Label className="text-sm text-foreground">Issue Type</Label>
+              <Select value={selectedType} onValueChange={setSelectedType}>
+                <SelectTrigger className="mt-2 bg-background/60">
+                  <SelectValue placeholder="Select issue type" />
+                </SelectTrigger>
+                <SelectContent>
+                  {type.map((item) => (
+                    <SelectItem key={item.id} value={item.name}>
+                      {item.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
 
             <div>
-              <label
-                htmlFor="comment"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
+              <Label className="text-sm text-foreground">Priority</Label>
+              <Select value={priority} onValueChange={setPriority}>
+                <SelectTrigger className="mt-2 bg-background/60">
+                  <SelectValue placeholder="Select priority" />
+                </SelectTrigger>
+                <SelectContent>
+                  {pri.map((item) => (
+                    <SelectItem key={item.id} value={item.name}>
+                      {item.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div>
+              <Label htmlFor="comment" className="text-sm text-foreground">
                 Description of Issue
-              </label>
+              </Label>
               <div className="mt-2">
-                <textarea
+                <Textarea
                   rows={4}
                   name="comment"
                   id="comment"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="bg-background/60"
                   defaultValue={""}
                   placeholder="I think i locked myself out!"
                   onChange={(e) => setDescription(e.target.value)}
@@ -325,16 +204,16 @@ export default function ClientTicketNew() {
               </div>
             </div>
 
-            <button
+            <Button
               type="button"
               onClick={submitTicket}
               disabled={isLoading}
-              className="rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 "
+              className="self-start"
             >
               Submit Ticket
-            </button>
+            </Button>
           </div>
-        </div>
+        </Card>
       ) : (
         <>
           <div className="rounded-md bg-green-600 shadow-md p-12">

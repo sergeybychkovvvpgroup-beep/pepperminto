@@ -1,4 +1,15 @@
 import { toast } from "@/shadcn/hooks/use-toast";
+import { Button } from "@/shadcn/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/shadcn/ui/card";
+import { Input } from "@/shadcn/ui/input";
+import { Label } from "@/shadcn/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/shadcn/ui/select";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
@@ -59,9 +70,9 @@ export default function Login({}) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-background flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-foreground">
           Create your new account
         </h2>
       </div>
@@ -70,37 +81,39 @@ export default function Login({}) {
         {status === "loading" ? (
           <div className="text-center mr-4">{/* <Loader size={32} /> */}</div>
         ) : (
-          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <div className="space-y-4">
+          <Card className="border-border/60 bg-card/80 shadow-lg backdrop-blur">
+            <CardHeader className="space-y-2 text-center">
+              <CardTitle className="text-xl text-foreground">
+                Sign up for Peppermint
+              </CardTitle>
+              <p className="text-sm text-muted-foreground">
+                External user registration.
+              </p>
+            </CardHeader>
+            <CardContent className="space-y-5">
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <Label htmlFor="email" className="text-sm text-foreground">
                   Email address
-                </label>
-                <div className="mt-1">
-                  <input
+                </Label>
+                <div className="mt-2">
+                  <Input
                     id="email"
                     name="email"
                     type="email"
                     autoComplete="email"
                     required
                     onChange={(e) => setEmail(e.target.value)}
-                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                    className="bg-background/60"
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <Label htmlFor="password" className="text-sm text-foreground">
                   Password
-                </label>
-                <div className="mt-1">
-                  <input
+                </Label>
+                <div className="mt-2">
+                  <Input
                     id="password"
                     name="password"
                     type="password"
@@ -108,78 +121,78 @@ export default function Login({}) {
                     required
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
-                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                    className="bg-background/60"
                   />
                 </div>
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <Label htmlFor="passwordConfirm" className="text-sm text-foreground">
                   Confirm Password
-                </label>
-                <div className="mt-1">
-                  <input
-                    id="password"
-                    name="password"
+                </Label>
+                <div className="mt-2">
+                  <Input
+                    id="passwordConfirm"
+                    name="passwordConfirm"
                     type="password"
                     autoComplete="password"
                     required
                     value={passwordConfirm}
                     onChange={(e) => setPasswordConfirm(e.target.value)}
-                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                    className="bg-background/60"
                   />
                 </div>
 
-                <label className="block text-sm font-medium text-gray-700">
-                  Language
-                </label>
-                <div className="mt-1 rounded-md shadow-sm flex">
-                  <select
-                    id="language"
-                    name="language"
-                    className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-                    value={language}
-                    onChange={(e) => setLanguage(e.target.value)}
-                  >
-                    <option value="en">English</option>
-                    <option value="de">German</option>
-                    <option value="se">Swedish</option>
-                    <option value="es">Spanish</option>
-                    <option value="no">Norwegian</option>
-                    <option value="fr">French</option>
-                    <option value="pt">Tagalong</option>
-                    <option value="da">Danish</option>
-                    <option value="pt">Portuguese</option>
-                    <option value="it">Italiano</option>
-                    <option value="he">Hebrew</option>
-                    <option value="tr">Turkish</option>
-                    <option value="hu">Hungarian</option>
-                    <option value="th">Thai (ภาษาไทย)</option>
-                    <option value="zh-CN">Simplified Chinese (简体中文)</option>
-                  </select>
-                </div>
+                <Label className="text-sm text-foreground">Language</Label>
+                <Select value={language} onValueChange={setLanguage}>
+                  <SelectTrigger className="mt-2 bg-background/60">
+                    <SelectValue placeholder="Select a language" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="en">English</SelectItem>
+                    <SelectItem value="de">German</SelectItem>
+                    <SelectItem value="se">Swedish</SelectItem>
+                    <SelectItem value="es">Spanish</SelectItem>
+                    <SelectItem value="no">Norwegian</SelectItem>
+                    <SelectItem value="fr">French</SelectItem>
+                    <SelectItem value="pt">Tagalong</SelectItem>
+                    <SelectItem value="da">Danish</SelectItem>
+                    <SelectItem value="pt">Portuguese</SelectItem>
+                    <SelectItem value="it">Italiano</SelectItem>
+                    <SelectItem value="he">Hebrew</SelectItem>
+                    <SelectItem value="tr">Turkish</SelectItem>
+                    <SelectItem value="hu">Hungarian</SelectItem>
+                    <SelectItem value="th">Thai (ภาษาไทย)</SelectItem>
+                    <SelectItem value="zh-CN">
+                      Simplified Chinese (简体中文)
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               <div>
-                <button
+                <Button
                   type="submit"
                   onClick={postData}
-                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                  className="w-full"
                 >
                   Create Account
-                </button>
+                </Button>
 
-                <p className="mt-2 text-xs text-gray-600 text-center">
+                <p className="mt-2 text-xs text-muted-foreground text-center">
                   Note this form is for external users only
                 </p>
               </div>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         )}
 
         <div className="mt-8 text-center flex flex-col space-y-2">
-          <span className="font-bold">Built with 💚 by Peppermint Labs</span>
-          <a href="https://docs.peppermint.sh/" target="_blank">
+          <span className="font-bold text-foreground">
+            Built with 💚 by Peppermint Labs
+          </span>
+          <a
+            href="https://docs.peppermint.sh/"
+            target="_blank"
+            className="text-foreground"
+          >
             Documentation
           </a>
         </div>

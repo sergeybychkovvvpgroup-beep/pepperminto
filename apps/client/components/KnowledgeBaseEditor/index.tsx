@@ -6,7 +6,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/shadcn/ui/dropdown-menu";
+import { Checkbox } from "@/shadcn/ui/checkbox";
 import { Input } from "@/shadcn/ui/input";
+import { Label } from "@/shadcn/ui/label";
 import { BlockNoteEditor, PartialBlock } from "@blocknote/core";
 import { BlockNoteView } from "@blocknote/mantine";
 import { getCookie } from "cookies-next";
@@ -270,50 +272,49 @@ export default function KnowledgeBaseEditor() {
           <div className="w-full max-w-3xl space-y-6">
             <div className="grid gap-4 md:grid-cols-2">
               <div>
-                <label className="text-sm text-foreground">Title</label>
+                <Label className="text-sm text-foreground">Title</Label>
                 <Input
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="mt-2"
+                  className="mt-2 bg-background/60"
                 />
               </div>
               <div>
-                <label className="text-sm text-foreground">Slug</label>
+                <Label className="text-sm text-foreground">Slug</Label>
                 <Input
                   value={slug}
                   onChange={(e) => setSlug(e.target.value)}
-                  className="mt-2"
+                  className="mt-2 bg-background/60"
                 />
               </div>
             </div>
 
             <div className="grid gap-4 md:grid-cols-2">
               <div>
-                <label className="text-sm text-foreground">Author</label>
+                <Label className="text-sm text-foreground">Author</Label>
                 <Input
                   value={author}
                   onChange={(e) => setAuthor(e.target.value)}
-                  className="mt-2"
+                  className="mt-2 bg-background/60"
                 />
               </div>
               <div>
-                <label className="text-sm text-foreground">Tags (CSV)</label>
+                <Label className="text-sm text-foreground">Tags (CSV)</Label>
                 <Input
                   value={tags}
                   onChange={(e) => setTags(e.target.value)}
-                  className="mt-2"
+                  className="mt-2 bg-background/60"
                 />
               </div>
             </div>
 
-            <label className="flex items-center gap-2 text-sm text-foreground">
-              <input
-                type="checkbox"
+            <Label className="flex items-center gap-2 text-sm text-foreground">
+              <Checkbox
                 checked={published}
-                onChange={(e) => setPublished(e.target.checked)}
+                onCheckedChange={(checked) => setPublished(Boolean(checked))}
               />
               Publish to public knowledge base
-            </label>
+            </Label>
 
             <BlockNoteView
               editor={editor}

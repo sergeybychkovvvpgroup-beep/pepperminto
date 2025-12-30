@@ -10,6 +10,14 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/shadcn/ui/select";
+import { Button } from "@/shadcn/ui/button";
 // import ClientNotesModal from "../../components/ClientNotesModal";
 // import UpdateClientModal from "../../components/UpdateClientModal";
 
@@ -128,40 +136,45 @@ function Table({ columns, data }: any) {
                   <p className="block text-sm font-medium text-muted-foreground mt-4">
                     Show
                   </p>
-                  <select
-                    id="location"
-                    name="location"
-                    className="block w-full rounded-md border border-border/70 bg-background/70 pl-3 pr-10 text-base text-foreground shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 sm:text-sm"
-                    value={table.getState().pagination.pageSize}
-                    onChange={(e) => {
-                      table.setPageSize(Number(e.target.value));
+                  <Select
+                    value={`${table.getState().pagination.pageSize}`}
+                    onValueChange={(value) => {
+                      table.setPageSize(Number(value));
                     }}
                   >
-                    {[10, 20, 30, 40, 50].map((pageSize) => (
-                      <option key={pageSize} value={pageSize}>
-                        {pageSize}
-                      </option>
-                    ))}
-                  </select>
+                    <SelectTrigger className="bg-background/60">
+                      <SelectValue placeholder="Page size" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {[10, 20, 30, 40, 50].map((pageSize) => (
+                        <SelectItem key={pageSize} value={`${pageSize}`}>
+                          {pageSize}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
               <div className="flex-1 flex justify-between sm:justify-end">
-                <button
-                  className="relative inline-flex items-center rounded-md border border-border/70 bg-background/70 px-4 py-2 text-sm font-medium text-foreground shadow-sm hover:bg-accent/40 disabled:cursor-not-allowed disabled:opacity-50"
+                <Button
+                  variant="outline"
+                  size="sm"
                   type="button"
                   onClick={() => table.previousPage()}
                   disabled={!table.getCanPreviousPage()}
                 >
                   Previous
-                </button>
-                <button
-                  className="ml-3 relative inline-flex items-center rounded-md border border-border/70 bg-background/70 px-4 py-2 text-sm font-medium text-foreground shadow-sm hover:bg-accent/40 disabled:cursor-not-allowed disabled:opacity-50"
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="ml-3"
                   type="button"
                   onClick={() => table.nextPage()}
                   disabled={!table.getCanNextPage()}
                 >
                   Next
-                </button>
+                </Button>
               </div>
             </nav>
           )}

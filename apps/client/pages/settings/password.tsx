@@ -2,6 +2,9 @@ import { useState } from "react";
 
 import { getCookie } from "cookies-next";
 import { toast } from "@/shadcn/hooks/use-toast";
+import { Button } from "@/shadcn/ui/button";
+import { Input } from "@/shadcn/ui/input";
+import { Label } from "@/shadcn/ui/label";
 
 export default function PasswordChange({ children }) {
   const token = getCookie("session");
@@ -51,31 +54,40 @@ export default function PasswordChange({ children }) {
       <main className="py-2">
         <div className="mt-4">
           <div className="m-2 space-y-4 p-4">
-            <input
-              type="password"
-              className="shadow-sm text-foreground bg-transparent focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter users new password"
-            />
+            <div className="space-y-2">
+              <Label className="text-sm text-foreground">
+                New password
+              </Label>
+              <Input
+                type="password"
+                className="bg-background/60"
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter users new password"
+              />
+            </div>
 
-            <input
-              type="password"
-              className="shadow-sm text-foreground bg-transparent focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-              onChange={(e) => setCheck(e.target.value)}
-              placeholder="Confirm users password"
-            />
+            <div className="space-y-2">
+              <Label className="text-sm text-foreground">
+                Confirm password
+              </Label>
+              <Input
+                type="password"
+                className="bg-background/60"
+                onChange={(e) => setCheck(e.target.value)}
+                placeholder="Confirm users password"
+              />
+            </div>
           </div>
         </div>
         <div className="pb-2 px-4 flex justify-end sm:px-6">
-          <button
+          <Button
             onClick={async () => {
               await postData();
             }}
             type="submit"
-            className="inline-flex bg-primary items-center px-4 py-2 border font-semibold border-gray-300 shadow-sm text-xs rounded text-white"
           >
             Update Password
-          </button>
+          </Button>
         </div>
       </main>
     </>

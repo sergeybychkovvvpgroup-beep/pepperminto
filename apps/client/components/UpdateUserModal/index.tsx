@@ -1,6 +1,7 @@
 import { toast } from "@/shadcn/hooks/use-toast";
 import { Dialog, DialogBackdrop, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import { Button } from "@/shadcn/ui/button";
 import { getCookie } from "cookies-next";
 import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
@@ -45,13 +46,9 @@ export default function UpdateUserModal({ user }) {
 
   return (
     <div>
-      <button
-        onClick={() => setOpen(true)}
-        type="button"
-        className="inline-flex items-center px-4 py-1.5 border font-semibold border-gray-300 shadow-sm text-xs rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-      >
+      <Button onClick={() => setOpen(true)} type="button" variant="outline">
         Role
-      </button>
+      </Button>
 
       <Transition.Root show={open} as={Fragment}>
         <Dialog
@@ -87,22 +84,23 @@ export default function UpdateUserModal({ user }) {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+              <div className="inline-block align-bottom rounded-lg bg-card/90 px-4 pt-5 pb-4 text-left shadow-xl backdrop-blur transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
                 <div className="hidden sm:block absolute top-0 right-0 pt-4 pr-4">
-                  <button
+                  <Button
                     type="button"
-                    className="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    variant="ghost"
+                    size="icon"
                     onClick={() => setOpen(false)}
                   >
                     <span className="sr-only">Close</span>
                     <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
+                  </Button>
                 </div>
                 <div className="sm:flex sm:items-start">
                   <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
                     <Dialog.Title
                       as="h3"
-                      className="text-lg leading-6 font-medium text-gray-900"
+                      className="text-lg leading-6 font-medium text-foreground"
                     >
                       Edit User Role
                     </Dialog.Title>
@@ -110,28 +108,22 @@ export default function UpdateUserModal({ user }) {
                       <div className="">
                         <div className="space-y-2 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
                           <span className="relative z-0 inline-flex shadow-sm rounded-md space-x-4">
-                            <button
+                            <Button
                               onClick={() => setAdmin(false)}
                               type="button"
-                              className={
-                                admin === false
-                                  ? "relative inline-flex items-center px-4 py-2 border border-gray-300 bg-green-500 text-sm font-medium text-white hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1"
-                                  : "relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1"
-                              }
+                              variant={admin ? "outline" : "default"}
+                              className="px-4 py-2"
                             >
                               User
-                            </button>
-                            <button
+                            </Button>
+                            <Button
                               onClick={() => setAdmin(true)}
                               type="button"
-                              className={
-                                admin === true
-                                  ? "relative inline-flex items-center px-4 py-2 border border-gray-300 bg-green-500 text-sm font-medium text-white hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1"
-                                  : "relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-10 focus:outline-none focus:ring-1"
-                              }
+                              variant={admin ? "default" : "outline"}
+                              className="px-4 py-2"
                             >
                               Admin
-                            </button>
+                            </Button>
                           </span>
                         </div>
                       </div>
@@ -139,15 +131,14 @@ export default function UpdateUserModal({ user }) {
                   </div>
                 </div>
                 <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-                  <button
+                  <Button
                     type="button"
-                    className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
                     onClick={async () => {
                       await updateUser();
                     }}
                   >
                     Update
-                  </button>
+                  </Button>
                 </div>
               </div>
             </Transition.Child>

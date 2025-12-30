@@ -9,6 +9,8 @@ import { useUser } from "../../store/session";
 
 import { toast } from "@/shadcn/hooks/use-toast";
 import { useSidebar } from "@/shadcn/ui/sidebar";
+import { Button } from "@/shadcn/ui/button";
+import { Input } from "@/shadcn/ui/input";
 import dynamic from "next/dynamic";
 
 const Editor = dynamic(() => import("../BlockEditor"), { ssr: false });
@@ -215,43 +217,45 @@ export default function CreateTicketModal({ keypress, setKeyPressDown }) {
                     New Issue
                   </span>
 
-                  <button
+                  <Button
                     type="button"
-                    className="ml-auto mb-1.5 text-foreground font-bold text-xs rounded-md hover:text-primary outline-none"
+                    variant="ghost"
+                    size="icon"
+                    className="ml-auto mb-1.5"
                     onClick={() => setOpen(false)}
                   >
                     <span className="sr-only">Close</span>
                     <XMarkIcon className="h-5 w-5" aria-hidden="true" />
-                  </button>
+                  </Button>
                 </div>
-                <input
+                <Input
                   type="text"
                   name="title"
                   placeholder="Issue title"
                   maxLength={64}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="w-full pl-0 pr-0 pt-0 text-md text-foreground bg-background border-none focus:outline-none focus:shadow-none focus:ring-0 focus:border-none"
+                  className="w-full border-border/70 bg-background/60 text-lg font-semibold"
                 />
 
                 <div className="">
                   {!hideName && (
-                    <input
+                    <Input
                       type="text"
                       id="name"
                       placeholder={t("ticket_name_here")}
                       name="name"
                       onChange={(e) => setName(e.target.value)}
-                      className=" w-full pl-0 pr-0text-foreground bg-background  sm:text-sm border-none focus:outline-none focus:shadow-none focus:ring-0 focus:border-none"
+                      className="w-full border-border/70 bg-background/60"
                     />
                   )}
 
                   {!hideEmail && (
-                    <input
+                    <Input
                       type="text"
                       name="email"
                       placeholder={t("ticket_email_here")}
                       onChange={(e) => setEmail(e.target.value)}
-                      className=" w-full pl-0 pr-0 text-foreground bg-background   sm:text-sm border-none focus:outline-none focus:shadow-none focus:ring-0 focus:border-none"
+                      className="w-full border-border/70 bg-background/60"
                     />
                   )}
 
@@ -583,18 +587,17 @@ export default function CreateTicketModal({ keypress, setKeyPressDown }) {
                     )}
                   </div>
 
-                  <div className="border-t border-gray-300 ">
+                  <div className="border-t border-border/60 ">
                     <div className="mt-2 float-right">
-                      <button
+                      <Button
                         onClick={() => {
                           setOpen(false);
                           createTicket();
                         }}
                         type="button"
-                        className="inline-flex justify-center rounded-md shadow-sm px-2.5 py-1.5 border border-transparent text-xs bg-green-600 font-medium text-white hover:bg-green-700 focus:outline-none "
                       >
                         Create Ticket
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 </div>

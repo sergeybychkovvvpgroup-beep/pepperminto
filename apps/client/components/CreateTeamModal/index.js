@@ -2,6 +2,9 @@ import React, { useState, Fragment } from "react";
 import { Dialog, DialogBackdrop, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
+import { Button } from "@/shadcn/ui/button";
+import { Input } from "@/shadcn/ui/input";
+import { Label } from "@/shadcn/ui/label";
 
 export default function CreateUser() {
   const [open, setOpen] = useState(false);
@@ -24,13 +27,9 @@ export default function CreateUser() {
 
   return (
     <div>
-      <button
-        onClick={() => setOpen(true)}
-        type="button"
-        className="inline-flex items-center p-1 border border-transparent rounded-md shadow-sm px-4 text-white bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-      >
+      <Button onClick={() => setOpen(true)} type="button">
         Create new Team
-      </button>
+      </Button>
 
       <Transition.Root show={open} as={Fragment}>
         <Dialog
@@ -66,46 +65,51 @@ export default function CreateUser() {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+              <div className="inline-block align-bottom rounded-lg bg-card/90 px-4 pt-5 pb-4 text-left shadow-xl backdrop-blur transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
                 <div className="hidden sm:block absolute top-0 right-0 pt-4 pr-4">
-                  <button
+                  <Button
                     type="button"
-                    className="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    variant="ghost"
+                    size="icon"
                     onClick={() => setOpen(false)}
                   >
                     <span className="sr-only">Close</span>
                     <XIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
+                  </Button>
                 </div>
                 <div className="sm:flex sm:items-start">
                   <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
                     <Dialog.Title
                       as="h3"
-                      className="text-lg leading-6 font-medium text-gray-900"
+                      className="text-lg leading-6 font-medium text-foreground"
                     >
                       Create a new Team
                     </Dialog.Title>
                     <div className="mt-2 space-y-4">
-                      <input
-                        type="text"
-                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                        placeholder="Team Name"
-                        onChange={(e) => setName(e.target.value)}
-                      />
+                      <div className="space-y-2">
+                        <Label className="text-sm text-foreground">
+                          Team name
+                        </Label>
+                        <Input
+                          type="text"
+                          className="bg-background/60"
+                          placeholder="Team Name"
+                          onChange={(e) => setName(e.target.value)}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-                  <button
+                  <Button
                     type="button"
-                    className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
                     onClick={() => {
                       createTeam();
                       // router.reload(router.pathname);
                     }}
                   >
                     Create
-                  </button>
+                  </Button>
                 </div>
               </div>
             </Transition.Child>

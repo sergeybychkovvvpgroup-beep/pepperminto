@@ -11,6 +11,14 @@ import {
 } from "@tanstack/react-table";
 import ResetPassword from "../../../../components//ResetPassword";
 import UpdateUserModal from "../../../../components/UpdateUserModal";
+import { Button } from "@/shadcn/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/shadcn/ui/select";
 
 const fetchUsers = async (token) => {
   const res = await fetch(`/api/v1/users/all`, {
@@ -132,40 +140,45 @@ function Table({ columns, data }) {
                   >
                     Show
                   </p>
-                  <select
-                    id="location"
-                    name="location"
-                    className="block w-full rounded-md border border-border/70 bg-background/70 pl-3 pr-10 text-base text-foreground shadow-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 sm:text-sm"
-                    value={table.getState().pagination.pageSize}
-                    onChange={(e) => {
-                      table.setPageSize(Number(e.target.value));
+                  <Select
+                    value={`${table.getState().pagination.pageSize}`}
+                    onValueChange={(value) => {
+                      table.setPageSize(Number(value));
                     }}
                   >
-                    {[10, 20, 30, 40, 50].map((pageSize) => (
-                      <option key={pageSize} value={pageSize}>
-                        {pageSize}
-                      </option>
-                    ))}
-                  </select>
+                    <SelectTrigger className="bg-background/60">
+                      <SelectValue placeholder="Page size" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {[10, 20, 30, 40, 50].map((pageSize) => (
+                        <SelectItem key={pageSize} value={`${pageSize}`}>
+                          {pageSize}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
               <div className="flex-1 flex justify-between sm:justify-end">
-                <button
-                  className="relative inline-flex items-center rounded-md border border-border/70 bg-background/70 px-4 py-2 text-sm font-medium text-foreground shadow-sm hover:bg-accent/40 disabled:cursor-not-allowed disabled:opacity-50"
+                <Button
+                  variant="outline"
+                  size="sm"
                   type="button"
                   onClick={() => table.previousPage()}
                   disabled={!table.getCanPreviousPage()}
                 >
                   Previous
-                </button>
-                <button
-                  className="ml-3 relative inline-flex items-center rounded-md border border-border/70 bg-background/70 px-4 py-2 text-sm font-medium text-foreground shadow-sm hover:bg-accent/40 disabled:cursor-not-allowed disabled:opacity-50"
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="ml-3"
                   type="button"
                   onClick={() => table.nextPage()}
                   disabled={!table.getCanNextPage()}
                 >
                   Next
-                </button>
+                </Button>
               </div>
             </nav>
           )}
@@ -220,13 +233,14 @@ export default function UserAuthPanel() {
               <UpdateUserModal user={row.original} />
               <ResetPassword user={row.original} />
               {row.original.isAdmin ? null : (
-                <button
+                <Button
                   type="button"
+                  variant="destructive"
+                  size="sm"
                   onClick={() => deleteUser(row.original.id)}
-                  className="inline-flex items-center px-4 py-1.5 border font-semibold border-gray-300 shadow-sm text-xs rounded text-white bg-red-700 hover:bg-red-500"
                 >
                   Delete
-                </button>
+                </Button>
               )}
             </div>
           );
@@ -241,24 +255,21 @@ export default function UserAuthPanel() {
       <div className="relative max-w-4xl mx-auto md:px-8 xl:px-0">
         <div className="pt-10 pb-16 divide-y-2">
           <div className="px-4 sm:px-6 md:px-0">
-            <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white">
+            <h1 className="text-3xl font-extrabold text-foreground">
               Internal Users
             </h1>
           </div>
           <div className="px-4 sm:px-6 md:px-0">
             <div className="sm:flex sm:items-center">
               <div className="sm:flex-auto mt-4">
-                <p className="mt-2 text-sm text-gray-700  dark:text-white">
+                <p className="mt-2 text-sm text-muted-foreground">
                   A list of all internal users of your instance.
                 </p>
               </div>
               <div className="sm:ml-16 mt-5 sm:flex-none">
-                <Link
-                  href="/admin/users/internal/new"
-                  className="rounded bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                >
-                  New User
-                </Link>
+                <Button asChild>
+                  <Link href="/admin/users/internal/new">New User</Link>
+                </Button>
               </div>
             </div>
             <div className="py-4">
@@ -286,14 +297,14 @@ export default function UserAuthPanel() {
                     {data.users.map((user) => (
                       <div
                         key={user.id}
-                        className="flex flex-col text-center bg-white rounded-lg shadow mt-4"
+                        className="flex flex-col text-center rounded-lg border border-border/60 bg-card/80 shadow mt-4"
                       >
                         <div className="flex-1 flex flex-col p-8">
-                          <h3 className=" text-gray-900 text-sm font-medium">
+                          <h3 className="text-foreground text-sm font-medium">
                             {user.name}
                           </h3>
                           <dl className="mt-1 flex-grow flex flex-col justify-between">
-                            <dd className="text-gray-500 text-sm">
+                            <dd className="text-muted-foreground text-sm">
                               {user.email}
                             </dd>
                             <dt className="sr-only">Role</dt>

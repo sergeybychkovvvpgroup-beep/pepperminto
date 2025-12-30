@@ -1,5 +1,14 @@
-import { Switch } from "@headlessui/react";
-import { Flex } from "@radix-ui/themes";
+import { Button } from "@/shadcn/ui/button";
+import { Input } from "@/shadcn/ui/input";
+import { Label } from "@/shadcn/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/shadcn/ui/select";
+import { Switch } from "@/shadcn/ui/switch";
 import { getCookie } from "cookies-next";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -84,78 +93,72 @@ export default function CreateUser() {
             </div>
           </div>
           <div className="">
-            <Flex gap="4" direction="column" align="start">
+            <div className="flex flex-col gap-4">
               <div className="w-1/2">
-                <label className="text-foreground font-bold">Name</label>
-                <input
+                <Label className="text-foreground font-bold">Name</Label>
+                <Input
                   type="text"
-                  className="px-3 py-2 text-foreground bg-transparent border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm"
+                  className="mt-2 bg-background/60"
                   placeholder="John Doe"
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
               <div className="w-1/2">
-                <label className="text-foreground font-bold">Email</label>
-                <input
+                <Label className="text-foreground font-bold">Email</Label>
+                <Input
                   type="text"
-                  className="px-3 py-2 text-foreground bg-transparent border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm"
+                  className="mt-2 bg-background/60"
                   placeholder="John.Doe@test.com"
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
               {!user.sso_active && (
                 <div className="w-1/2">
-                  <label className="text-foreground font-bold">Password</label>
-                  <input
+                  <Label className="text-foreground font-bold">Password</Label>
+                  <Input
                     type="text"
-                    className="px-3 py-2 text-foreground bg-transparent border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm"
+                    className="mt-2 bg-background/60"
                     placeholder=""
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
               )}
               <div className="w-1/2 flex flex-col">
-                <label className="text-foreground font-bold">Language</label>
-                <select
-                  id="language"
-                  name="language"
-                  className="mt-1 text-foreground bg-transparent block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-                  value={language}
-                  onChange={(e) => setLanguage(e.target.value)}
-                >
-                  <option value="en">English</option>
-                  <option value="de">German</option>
-                  <option value="se">Swedish</option>
-                  <option value="es">Spanish</option>
-                  <option value="no">Norwegian</option>
-                  <option value="fr">French</option>
-                  <option value="pt">Tagalong</option>
-                  <option value="da">Danish</option>
-                  <option value="pt">Portuguese</option>
-                  <option value="it">Italiano</option>
-                  <option value="he">Hebrew</option>
-                  <option value="tr">Turkish</option>
-                  <option value="hu">Hungarian</option>
-                  <option value="th">Thai (ภาษาไทย)</option>
-                  <option value="zh-CN">Simplified Chinese (简体中文)</option>
-                </select>
+                <Label className="text-foreground font-bold">Language</Label>
+                <Select value={language} onValueChange={setLanguage}>
+                  <SelectTrigger className="mt-2 bg-background/60">
+                    <SelectValue placeholder="Select a language" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="en">English</SelectItem>
+                    <SelectItem value="de">German</SelectItem>
+                    <SelectItem value="se">Swedish</SelectItem>
+                    <SelectItem value="es">Spanish</SelectItem>
+                    <SelectItem value="no">Norwegian</SelectItem>
+                    <SelectItem value="fr">French</SelectItem>
+                    <SelectItem value="pt">Tagalong</SelectItem>
+                    <SelectItem value="da">Danish</SelectItem>
+                    <SelectItem value="pt">Portuguese</SelectItem>
+                    <SelectItem value="it">Italiano</SelectItem>
+                    <SelectItem value="he">Hebrew</SelectItem>
+                    <SelectItem value="tr">Turkish</SelectItem>
+                    <SelectItem value="hu">Hungarian</SelectItem>
+                    <SelectItem value="th">Thai (ภาษาไทย)</SelectItem>
+                    <SelectItem value="zh-CN">
+                      Simplified Chinese (简体中文)
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
               <div>
-                <label className="text-foreground font-bold">Admin User</label>
+                <Label className="text-foreground font-bold">Admin User</Label>
                 <div className="flex flex-row space-x-2 items-center">
                   <Switch
                     checked={admin}
                     onChange={setAdmin}
-                    className={`${
-                      admin ? "bg-blue-600" : "bg-gray-200"
-                    } relative inline-flex h-6 w-11 items-center rounded-full`}
+                    className="data-[state=checked]:bg-primary"
                   >
-                    <span className="sr-only">Enable notifications</span>
-                    <span
-                      className={`${
-                        admin ? "translate-x-6" : "translate-x-1"
-                      } inline-block h-4 w-4 transform rounded-full bg-white transition`}
-                    />
+                    <span className="sr-only">Enable admin access</span>
                   </Switch>
                 </div>
               </div>
@@ -163,14 +166,13 @@ export default function CreateUser() {
                 className="flex justify-end w-full "
                 onClick={() => createUser()}
               >
-                <button
+                <Button
                   type="button"
-                  className="rounded-md bg-green-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-green-500"
                 >
                   Create User
-                </button>
+                </Button>
               </div>
-            </Flex>
+            </div>
           </div>
         </div>
       </main>
