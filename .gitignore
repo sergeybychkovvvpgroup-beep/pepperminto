@@ -24,6 +24,7 @@ apps/api/uploads
 /out
 
 # turborepo
+**/.turbo
 /.turbo
 
 # production
