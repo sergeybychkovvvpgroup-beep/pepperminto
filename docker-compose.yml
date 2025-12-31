@@ -1,35 +1,51 @@
-version: "3.1"
+version: "3.9"
 
 services:
-  peppermint_postgres:
-    container_name: peppermint_postgres
-    image: postgres:latest
-    restart: always
-    volumes:
-      - pgdata_live:/var/lib/postgresql/data
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
     environment:
       POSTGRES_USER: peppermint
-      POSTGRES_PASSWORD: 12345
+      POSTGRES_PASSWORD: peppermint
       POSTGRES_DB: peppermint
-
-  peppermint:
-    container_name: peppermint
-    image: pepperlabs/peppermint:latest
+    volumes:
+      - peppermint_db:/var/lib/postgresql/data
     ports:
-      - 1000:3000
-      - 1001:3001
-# If running via Docker on a hypervisor, enable DNS.
-#    dns:
-#      - 1.1.1.1
-#      - 8.8.8.8
-    restart: always
+      - "5432:5432"
+
+  api:
+    image: nulldoubt/pepperminto-api:latest
+    restart: unless-stopped
     depends_on:
-      - peppermint_postgres
+      - db
     environment:
-      DB_USERNAME: "peppermint"
-      DB_PASSWORD: "12345"
-      DB_HOST: "peppermint_postgres"
-      SECRET: 'peppermint4life'
+      DATABASE_URL: postgres://peppermint:peppermint@db:5432/peppermint
+      JWT_SECRET: change-me
+      NODE_ENV: production
+    ports:
+      - "3001:3001"
+
+  client:
+    image: nulldoubt/pepperminto-client:latest
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "3002:3002"
+
+  knowledge-base:
+    image: nulldoubt/pepperminto-knowledge-base:latest
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - "3000:3000"
+
+  docs:
+    image: nulldoubt/pepperminto-docs:latest
+    restart: unless-stopped
+    ports:
+      - "3003:3003"
 
 volumes:
- pgdata_live:
+  peppermint_db:
