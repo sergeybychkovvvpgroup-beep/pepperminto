@@ -1,4 +1,4 @@
-import { Footer, Layout, Navbar, Sidebar } from 'nextra-theme-docs'
+import { Footer, Layout, Navbar } from 'nextra-theme-docs'
 import { Banner, Head } from 'nextra/components'
 import { getPageMap } from 'nextra/page-map'
 import type { Metadata } from 'next'
@@ -50,7 +50,10 @@ const sidebar = {
 }
 
 export default async function RootLayout({ children }) {
-  const title = metadata.title.template;
+  const title =
+    metadata.title && typeof metadata.title === "object" && "template" in metadata.title
+      ? metadata.title.template
+      : undefined;
   return (
     <html
       lang="en"
@@ -58,21 +61,40 @@ export default async function RootLayout({ children }) {
       suppressHydrationWarning
     >
       <Head>
-        {metadata.icons.map((icon, index) => (
-          <link key={index} rel={icon.rel} href={icon.url} />
-        ))}
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="mask-icon" href="/favicon.ico" />
         <meta httpEquiv="Content-Language" content="en" />
-        <meta name="description" content={metadata.description} />
+        <meta
+          name="description"
+          content={metadata.description ?? "Pepperminto documentation"}
+        />
         <meta
           name="og:title"
-          content={title ? `${title} - Pepperminto` : metadata.title.default}
+          content={title ? `${title} - Pepperminto` : "Pepperminto"}
         />
-        <meta name="og:description" content={metadata.description} />
-        <meta name="og:image" content={metadata.openGraph.images} />
-        <meta name="og:url" content={metadata.openGraph.url} />
+        <meta
+          name="og:description"
+          content={metadata.description ?? "Pepperminto documentation"}
+        />
+        <meta name="og:image" content="/og-image.png" />
+        <meta
+          name="og:url"
+          content={
+            typeof metadata.openGraph?.url === "string"
+              ? metadata.openGraph.url
+              : metadata.openGraph?.url?.toString() ?? "https://pepperminto.sh"
+          }
+        />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content={metadata.twitter.site} />
-        <meta name="twitter:creator" content={metadata.twitter.creator} />
+        <meta
+          name="twitter:site"
+          content={metadata.twitter?.site ?? "@pepperminto"}
+        />
+        <meta
+          name="twitter:creator"
+          content={metadata.twitter?.creator ?? "@pepperminto"}
+        />
         <meta name="apple-mobile-web-app-title" content="Pepperminto" />
       </Head>
       <body>
