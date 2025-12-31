@@ -18,10 +18,9 @@ FROM base AS builder
 
 # Set working directory
 WORKDIR /app
-RUN corepack enable
-RUN pnpm add -g turbo
+RUN corepack enable && corepack prepare pnpm@10.26.2 --activate
 COPY . .
-RUN turbo prune --scope=api --docker
+RUN pnpm dlx turbo@2.7.2 prune --scope=api --docker
 
 
 # Add lockfile and package.json's of isolated subworkspace
@@ -32,14 +31,14 @@ WORKDIR /app
 COPY .gitignore .gitignore
 COPY --from=builder /app/out/json/ .
 COPY --from=builder /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
-RUN corepack enable
+RUN corepack enable && corepack prepare pnpm@10.26.2 --activate
 RUN pnpm install
 
 
 # Build the project and its dependencies
 COPY --from=builder /app/out/full/ .
 RUN ls
-COPY turbo.json /../../turbo.json
+COPY turbo.json /app/turbo.json
 
 # RUN rm -f apps/api/.env
 
