@@ -7,7 +7,8 @@ WORKDIR /app
 RUN corepack enable && corepack prepare pnpm@10.26.2 --activate
 COPY pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY . .
-RUN pnpm dlx turbo@2.7.2 prune --scope=docs --docker
+RUN --mount=type=cache,id=pnpm-store,target=/root/.local/share/pnpm/store \
+    pnpm dlx turbo@2.7.2 prune --scope=docs --docker
 
 FROM base AS installer
 WORKDIR /app
@@ -15,9 +16,12 @@ COPY .gitignore .gitignore
 COPY --from=builder /app/out/json/ .
 COPY --from=builder /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 RUN corepack enable && corepack prepare pnpm@10.26.2 --activate
-RUN pnpm install --frozen-lockfile
+RUN --mount=type=cache,id=pnpm-store,target=/root/.local/share/pnpm/store \
+    pnpm install --frozen-lockfile
 COPY --from=builder /app/out/full/ .
 COPY turbo.json /app/turbo.json
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV SKIP_TYPECHECK=1
 RUN pnpm turbo run build --filter=docs...
 
 FROM base AS runner

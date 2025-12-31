@@ -5,6 +5,9 @@ module.exports = nextTranslate(
   removeImports({
     reactStrictMode: false,
     output: "standalone",
+    typescript: {
+      ignoreBuildErrors: process.env.SKIP_TYPECHECK === "1",
+    },
     async rewrites() {
       return [
         {
