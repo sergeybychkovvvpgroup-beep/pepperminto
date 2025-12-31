@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "next --turbopack -p 3003",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start -p 3003"
   },
   "keywords": [],
@@ -20,6 +20,7 @@
     "react-spinners": "^0.17.0"
   },
   "devDependencies": {
+    "@types/node": "^25.0.3",
     "@types/react": "19.2.7",
     "@types/react-dom": "^19.2.3"
   }
