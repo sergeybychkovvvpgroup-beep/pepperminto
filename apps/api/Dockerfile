@@ -35,7 +35,7 @@ COPY .gitignore .gitignore
 COPY --from=builder /app/out/json/ .
 COPY --from=builder /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 RUN corepack enable && corepack prepare pnpm@10.26.2 --activate
-RUN pnpm install
+RUN pnpm install --frozen-lockfile --ignore-scripts
 
 
 # Build the project and its dependencies
@@ -45,6 +45,7 @@ COPY turbo.json /app/turbo.json
 
 # RUN rm -f apps/api/.env
 
+RUN pnpm --filter api prisma generate --schema ./apps/api/src/prisma/schema.prisma
 RUN pnpm turbo run build --filter=database
 
 FROM base AS runner
