@@ -26,17 +26,21 @@ type BlockNode = {
 };
 
 async function getArticle(slug: string) {
-  const res = await fetch(
-    `${API_URL}/api/v1/knowledge-base/public/${encodeURIComponent(slug)}`,
-    { next: { revalidate: 60 } }
-  );
+  try {
+    const res = await fetch(
+      `${API_URL}/api/v1/knowledge-base/public/${encodeURIComponent(slug)}`,
+      { next: { revalidate: 60 } }
+    );
 
-  if (!res.ok) {
+    if (!res.ok) {
+      return null;
+    }
+
+    const data = await res.json();
+    return data.article as Article;
+  } catch (error) {
     return null;
   }
-
-  const data = await res.json();
-  return data.article as Article;
 }
 
 function formatDate(value: string) {

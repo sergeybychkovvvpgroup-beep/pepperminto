@@ -30,17 +30,21 @@ async function getArticles(query?: string, tag?: string) {
   if (query) params.set("q", query);
   if (tag) params.set("tag", tag);
 
-  const res = await fetch(
-    `${API_URL}/api/v1/knowledge-base/public?${params.toString()}`,
-    { next: { revalidate: 60 } }
-  );
+  try {
+    const res = await fetch(
+      `${API_URL}/api/v1/knowledge-base/public?${params.toString()}`,
+      { next: { revalidate: 60 } }
+    );
 
-  if (!res.ok) {
+    if (!res.ok) {
+      return [] as Article[];
+    }
+
+    const data = await res.json();
+    return (data.articles || []) as Article[];
+  } catch (error) {
     return [] as Article[];
   }
-
-  const data = await res.json();
-  return (data.articles || []) as Article[];
 }
 
 function formatDate(value: string) {
