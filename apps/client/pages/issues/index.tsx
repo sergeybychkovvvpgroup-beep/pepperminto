@@ -26,7 +26,8 @@ export default function Tickets() {
   const router = useRouter();
   const { t } = useTranslation("peppermint");
 
-  const token = getCookie("session");
+  const rawToken = getCookie("session");
+  const token = typeof rawToken === "string" ? rawToken : "";
   const user = useUser();
   
   // Fetch tickets data

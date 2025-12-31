@@ -62,7 +62,7 @@ function Table({ columns, data }: any) {
       },
     },
     defaultColumn: {
-      filterFn: "startsWith",
+      filterFn: "includesString",
     },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -81,7 +81,9 @@ function Table({ columns, data }: any) {
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => {
-                    const hideHeader = header.column.columnDef.hideHeader === false;
+                    const hideHeader =
+                      (header.column.columnDef as { hideHeader?: boolean })
+                        .hideHeader === false;
                     if (hideHeader) {
                       return null;
                     }

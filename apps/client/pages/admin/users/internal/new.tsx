@@ -155,7 +155,7 @@ export default function CreateUser() {
                 <div className="flex flex-row space-x-2 items-center">
                   <Switch
                     checked={admin}
-                    onChange={setAdmin}
+                    onCheckedChange={setAdmin}
                     className="data-[state=checked]:bg-primary"
                   >
                     <span className="sr-only">Enable admin access</span>

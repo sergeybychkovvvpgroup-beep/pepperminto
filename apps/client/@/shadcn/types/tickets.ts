@@ -16,6 +16,8 @@ export type Ticket = {
   id: string;
   Number: number;
   title: string;
+  detail?: unknown;
+  note?: string | null;
   priority: string;
   type: string;
   status: string;
