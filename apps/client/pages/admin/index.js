@@ -11,7 +11,7 @@ export default function BlankPage() {
               Admin Console
             </p>
             <h1 className="text-3xl font-semibold text-foreground">
-              Welcome to Peppermint
+              Welcome to Pepperminto
             </h1>
             <p className="mt-2 text-sm text-muted-foreground">
               Manage teams, tickets, and settings while keeping the support

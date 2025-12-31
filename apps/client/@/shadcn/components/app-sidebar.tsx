@@ -53,7 +53,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const data = {
     teams: [
       {
-        name: "Peppermint",
+        name: "Pepperminto",
         plan: `version: ${process.env.NEXT_PUBLIC_CLIENT_VERSION}`,
       },
     ],
@@ -253,7 +253,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </div>
           <div className="grid flex-1 text-left text-sm leading-tight text-foreground group-data-[collapsible=icon]:hidden">
             <span className="truncate text-lg font-semibold text-foreground">
-              Peppermint
+              Pepperminto
             </span>
             <span className="truncate text-xs text-muted-foreground">
               version: {process.env.NEXT_PUBLIC_CLIENT_VERSION}

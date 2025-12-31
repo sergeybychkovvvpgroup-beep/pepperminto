@@ -13,6 +13,7 @@ import { Ellipsis } from "lucide-react";
 import moment from "moment";
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
+import { useTheme } from "next-themes";
 import { useDebounce } from "use-debounce";
 import { useUser } from "../../store/session";
 
@@ -30,6 +31,7 @@ function isHTML(str) {
 export default function NotebookEditor() {
   const router = useRouter();
   const token = getCookie("session");
+  const { theme } = useTheme();
 
   const user = useUser();
 
@@ -203,12 +205,15 @@ export default function NotebookEditor() {
               />
             </div>
 
-            <BlockNoteView
-              editor={editor}
-              sideMenu={false}
-              className="m-0 p-0"
-              onChange={handleInputChange}
-            />
+            <div className="rounded-md border border-border/60 bg-background/60 p-3">
+              <BlockNoteView
+                editor={editor}
+                sideMenu={false}
+                theme={theme === "dark" ? "dark" : "light"}
+                className="min-h-[50vh] bg-transparent"
+                onChange={handleInputChange}
+              />
+            </div>
           </div>
         </div>
       )}

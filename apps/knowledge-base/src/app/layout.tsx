@@ -10,9 +10,9 @@ const geist = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Peppermint Knowledge Base",
+  title: "Pepperminto Knowledge Base",
   description:
-    "Find answers, guides, and troubleshooting steps for Peppermint.",
+    "Find answers, guides, and troubleshooting steps for Pepperminto.",
 };
 
 export default function RootLayout({

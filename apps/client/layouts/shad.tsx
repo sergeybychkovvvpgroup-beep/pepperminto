@@ -48,7 +48,7 @@ export default function ShadLayout({ children }: any) {
                   <SidebarTrigger title="[" className="text-muted-foreground" />
                   <div className="hidden w-full items-center justify-start space-x-6 sm:flex">
                     {user.isAdmin && (
-                      <Link href="https://github.com/Peppermint-Lab/peppermint/releases">
+                      <Link href="https://github.com/nulldoubt/Pepperminto/releases">
                         <span className="inline-flex items-center rounded-md border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
                           Version {process.env.NEXT_PUBLIC_CLIENT_VERSION}
                         </span>
@@ -87,7 +87,7 @@ export default function ShadLayout({ children }: any) {
 
                     {user.isAdmin && (
                       <Link
-                        href="https://github.com/Peppermint-Lab/peppermint/discussions"
+                        href="https://github.com/nulldoubt/Pepperminto/discussions"
                         target="_blank"
                         className="hover:cursor-pointer"
                       >

@@ -95,7 +95,7 @@ export default async function KnowledgeBasePage({
         <Link href="/" className="flex items-center gap-3">
           <span className="text-2xl">🍵</span>
           <span className="text-lg font-semibold tracking-wide">
-            Peppermint Help Center
+            Pepperminto Help Center
           </span>
         </Link>
         <nav className="hidden gap-6 text-sm text-slate-300 md:flex">
@@ -105,7 +105,7 @@ export default async function KnowledgeBasePage({
           <a className="hover:text-white" href="https://docs.peppermint.sh">
             Docs
           </a>
-          <a className="hover:text-white" href="https://github.com/Peppermint-Lab/peppermint">
+          <a className="hover:text-white" href="https://github.com/nulldoubt/Pepperminto">
             GitHub
           </a>
         </nav>
@@ -121,7 +121,7 @@ export default async function KnowledgeBasePage({
           </h1>
           <p className="mt-4 max-w-2xl text-base text-slate-300">
             Search curated guides, troubleshooting checklists, and step-by-step
-            workflows for running Peppermint. Articles here are written by the
+            workflows for running Pepperminto. Articles here are written by the
             team and updated with every release.
           </p>
 

@@ -23,6 +23,7 @@ import moment from "moment";
 import useTranslation from "next-translate/useTranslation";
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useTheme } from "next-themes";
 import Frame from "react-frame-component";
 import { useQuery } from "@tanstack/react-query";
 import { useDebounce } from "use-debounce";
@@ -95,6 +96,7 @@ const priorityOptions = [
 export default function Ticket() {
   const router = useRouter();
   const { t } = useTranslation("peppermint");
+  const { theme } = useTheme();
 
   const token = getCookie("session");
 
@@ -920,13 +922,16 @@ export default function Ticket() {
                     <div className="prose max-w-none mt-2">
                       {!data.ticket.fromImap ? (
                         <>
-                          <BlockNoteView
-                            editor={editor}
-                            sideMenu={false}
-                            className="m-0 p-0 bg-transparent dark:text-white"
-                            onChange={handleInputChange}
-                            editable={!data.ticket.locked}
-                          />
+                          <div className="rounded-md border border-border/60 bg-background/60 p-3">
+                            <BlockNoteView
+                              editor={editor}
+                              sideMenu={false}
+                              theme={theme === "dark" ? "dark" : "light"}
+                              className="min-h-[50vh] bg-transparent"
+                              onChange={handleInputChange}
+                              editable={!data.ticket.locked}
+                            />
+                          </div>
                         </>
                       ) : (
                         <div className="">

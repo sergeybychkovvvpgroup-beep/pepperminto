@@ -91,7 +91,7 @@ export default async function ArticlePage({
         <Link href="/" className="flex items-center gap-3">
           <span className="text-2xl">🍵</span>
           <span className="text-lg font-semibold tracking-wide">
-            Peppermint Help Center
+            Pepperminto Help Center
           </span>
         </Link>
         <Link

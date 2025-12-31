@@ -217,7 +217,7 @@ export default function CreateTicketModal({ keypress, setKeyPressDown }) {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <div className="relative z-50 inline-block bg-background rounded-lg px-4 pt-5 pb-4 text-left shadow-xl transform transition-all sm:my-8 align-middle md:max-w-3xl w-full ">
+              <div className="relative z-50 inline-block bg-background rounded-lg p-6 text-left shadow-xl transform transition-all sm:my-8 align-middle md:max-w-3xl w-full ">
                 <div className="flex flex-row w-full align-middle">
                   <span className="text-md pb-2 font-semibold text-sm">
                     New Issue
@@ -243,7 +243,7 @@ export default function CreateTicketModal({ keypress, setKeyPressDown }) {
                   className="w-full border-border/70 bg-background/60 text-lg font-semibold"
                 />
 
-                <div className="">
+                <div className="mt-3 space-y-3">
                   {!hideName && (
                     <Input
                       type="text"
@@ -265,9 +265,11 @@ export default function CreateTicketModal({ keypress, setKeyPressDown }) {
                     />
                   )}
 
-                  <Editor setIssue={setIssue} />
+                  <div className="pt-1">
+                    <Editor setIssue={setIssue} />
+                  </div>
 
-                  <div className="flex flex-row space-x-4 pb-2 mt-2">
+                  <div className="flex flex-row space-x-4 pb-2">
                     {!user.external_user && (
                       <>
                         <Select

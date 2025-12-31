@@ -145,8 +145,8 @@ server.register(async (app) => {
   app.register(swagger, {
     openapi: {
       info: {
-        title: "Peppermint API",
-        description: "Peppermint API documentation",
+        title: "Pepperminto API",
+        description: "Pepperminto API documentation",
         version: "1.0.0",
       },
       servers: [

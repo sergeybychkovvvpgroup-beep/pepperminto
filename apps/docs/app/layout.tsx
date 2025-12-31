@@ -5,15 +5,15 @@ import type { Metadata } from 'next'
 import 'nextra-theme-docs/style.css'
  
 export const metadata: Metadata = {
-  metadataBase: new URL("https://peppermint.sh"),
+  metadataBase: new URL("https://pepperminto.sh"),
   title: {
-    template: "Peppermint",
-    default: "Peppermint - Revolutionizing Customer Support for Rapid Resolutions. Your Premier Zendesk Alternative.",
+    template: "Pepperminto",
+    default: "Pepperminto - Revolutionizing Customer Support for Rapid Resolutions. Your Premier Zendesk Alternative.",
   },
-  description: "Experience Peppermint's revolutionary approach to customer support, ensuring swift resolutions. Discover your ultimate alternative to Zendesk.",
+  description: "Pepperminto is an open-source helpdesk focused on fast workflows, clear ownership, and reliable customer support.",
   openGraph: {
     images: "/og-image.png",
-    url: "https://peppermint.sh",
+    url: "https://pepperminto.sh",
   },
   manifest: "/site.webmanifest",
   icons: [
@@ -30,17 +30,17 @@ export const metadata: Metadata = {
 
 const banner = (<Banner storageKey="some-key">
     <a
-      href="https://github.com/Peppermint-Lab/peppermint/releases"
+      href="https://github.com/nulldoubt/Pepperminto/releases"
       target="_blank"
       rel="noreferrer"
     >
-      🎉 Peppermint 0.4.5 is here! Check it out now! 🚀
+      🎉 Pepperminto updates are rolling out! Check the latest release notes. 🚀
     </a>
 </Banner>)
 
 const navbar = (
   <Navbar
-    logo={<b>Peppermint</b>}
+    logo={<b>Pepperminto</b>}
   />
 )
 
@@ -65,7 +65,7 @@ export default async function RootLayout({ children }) {
         <meta name="description" content={metadata.description} />
         <meta
           name="og:title"
-          content={title ? `${title} - Panda` : metadata.title.default}
+          content={title ? `${title} - Pepperminto` : metadata.title.default}
         />
         <meta name="og:description" content={metadata.description} />
         <meta name="og:image" content={metadata.openGraph.images} />
@@ -73,14 +73,14 @@ export default async function RootLayout({ children }) {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content={metadata.twitter.site} />
         <meta name="twitter:creator" content={metadata.twitter.creator} />
-        <meta name="apple-mobile-web-app-title" content="Panda" />
+        <meta name="apple-mobile-web-app-title" content="Pepperminto" />
       </Head>
       <body>
         <Layout
           banner={banner}
           navbar={navbar}
           pageMap={await getPageMap()}
-          docsRepositoryBase="https://github.com/Peppermint-Lab/docs"
+          docsRepositoryBase="https://github.com/nulldoubt/Pepperminto"
           sidebar={sidebar}
         >
           {children}

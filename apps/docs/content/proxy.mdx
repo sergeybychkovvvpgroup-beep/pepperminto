@@ -1,9 +1,9 @@
 
-## Peppermint behind a reverse proxy
+## Pepperminto behind a reverse proxy
 
 Sometimes, individuals & organisations like to put applications behind a reverse proxy, the main reason for this is to allow applications to be accessed on specific domains.
 
-An example of this would be a helpdesk company running peppermint having it accessible to employee's through their domain name.
+An example of this would be a helpdesk company running Pepperminto having it accessible to employee's through their domain name.
 
 ```
 https://support.example.com
@@ -14,7 +14,7 @@ Behind the scenes you'll most likely use nginx, trafik or haproxy to achieve thi
 In the end, you should have a setup like so:
 
 ```
-https://peppermint.example.com -> https://peppermintapi.example.com -> nginx -> peppermint docker
+https://pepperminto.example.com -> https://pepperminto-api.example.com -> nginx -> Pepperminto docker
 ```
 
 I know two different subdomains may seem a bit overkill, but this is the only way to achieve this goal.
@@ -108,12 +108,12 @@ http://your_server_ip
 
 And if everything is good you should see the welcome to nginx sign.
 
-## Setting up peppermint
+## Setting up Pepperminto
 
 Now nginx is out the way and configured, we can now simply download the docker compose file from github:
 
 ```
-wget https://raw.githubusercontent.com/Peppermint-Lab/Peppermint/master/docker-compose.yml
+wget https://raw.githubusercontent.com/nulldoubt/Pepperminto/master/docker-compose.yml
 ```
 
 After this we should be able to run:
@@ -190,7 +190,7 @@ This will bring an editor up, in which you will paste
 server {
     listen 80;
     listen [::]:80;
-    server_name peppermint.example.com;
+    server_name pepperminto.example.com;
     add_header Strict-Transport-Security "max-age=15552000; includeSubDomains" always;
 
     location / {
@@ -210,7 +210,7 @@ server {
 Replace the server name with your url of choice, including subdomain and procced to save the file as
 
 ```
-peppermint-client.conf
+pepperminto-client.conf
 ```
 
 ### API Proxy Config
@@ -219,7 +219,7 @@ peppermint-client.conf
 server {
     listen 80;
     listen [::]:80;
-    server_name peppermintapi.example.com;
+    server_name pepperminto-api.example.com;
     add_header Strict-Transport-Security "max-age=15552000; includeSubDomains" always;
 
     location / {
@@ -239,7 +239,7 @@ server {
 Replace the server name with your url of choice, including subdomain and procced to save the file as, make sure this matches what you put in the docker-compose.yml file
 
 ```
-peppermint-api.conf
+pepperminto-api.conf
 ```
 
 ### Restarting nginx
@@ -252,7 +252,7 @@ This can be achieved by running:
 systemctl restart nginx
 ```
 
-You should now be able to see peppermint running on your choosen subdomain.
+You should now be able to see Pepperminto running on your choosen subdomain.
 
 I hope you found this guide usual :)
 

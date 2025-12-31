@@ -84,7 +84,7 @@ export default function Login({}) {
           <Card className="border-border/60 bg-card/80 shadow-lg backdrop-blur">
             <CardHeader className="space-y-2 text-center">
               <CardTitle className="text-xl text-foreground">
-                Sign up for Peppermint
+                Sign up for Pepperminto
               </CardTitle>
               <p className="text-sm text-muted-foreground">
                 External user registration.
@@ -186,7 +186,7 @@ export default function Login({}) {
 
         <div className="mt-8 text-center flex flex-col space-y-2">
           <span className="font-bold text-foreground">
-            Built with 💚 by Peppermint Labs
+            Built with 💚 by Pepperminto Labs
           </span>
           <a
             href="https://docs.peppermint.sh/"

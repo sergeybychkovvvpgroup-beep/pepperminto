@@ -156,7 +156,7 @@ export default function Login({}) {
 
         <div className="mt-8 text-center flex flex-col space-y-2">
           <span className="font-bold text-foreground">
-            Built with 💚 by Peppermint Labs
+            Built with 💚 by Pepperminto Labs
           </span>
           <a
             href="https://docs.peppermint.sh/"
