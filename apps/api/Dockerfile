@@ -13,9 +13,6 @@ FROM node:22-alpine AS base
 
 RUN apk add --no-cache libc6-compat
 
-# The web Dockerfile is copy-pasted into our main docs at /docs/handbook/deploying-with-docker.
-# Make sure you update this Dockerfile, the Dockerfile in the web workspace and copy that over to Dockerfile in the docs.
-
 FROM base AS builder
 
 # Set working directory
@@ -40,16 +37,17 @@ RUN pnpm install --frozen-lockfile --ignore-scripts
 
 # Build the project and its dependencies
 COPY --from=builder /app/out/full/ .
-RUN ls
 COPY turbo.json /app/turbo.json
 
 # RUN rm -f apps/api/.env
 
-RUN pnpm --filter api prisma generate --schema ./apps/api/src/prisma/schema.prisma
+RUN pnpm --filter api exec prisma generate --schema ./apps/api/src/prisma/schema.prisma
 RUN pnpm --filter api build
 
 FROM base AS runner
 WORKDIR /app
+ENV NODE_ENV=production
+ENV PORT=3001
 
 # Don't run production as root
 # RUN addgroup --system --gid 1001 prod
@@ -57,5 +55,5 @@ WORKDIR /app
 # USER prod
 COPY --from=installer /app .
 
-EXPOSE 8090
-CMD ["node", "apps/api/dist/"]
+EXPOSE 3001
+CMD ["node", "apps/api/dist/main.js"]

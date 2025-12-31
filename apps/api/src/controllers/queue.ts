@@ -153,7 +153,7 @@ export function emailQueueRoutes(fastify: FastifyInstance) {
       });
 
       const google = new OAuth2Client(
-        //@ts-expect-error
+        //@ts-ignore
         mailbox?.clientId,
         mailbox?.clientSecret,
         mailbox?.redirectUri

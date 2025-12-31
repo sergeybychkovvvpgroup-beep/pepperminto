@@ -23,6 +23,7 @@ RUN pnpm turbo run build --filter=docs...
 FROM base AS runner
 WORKDIR /app
 ENV NODE_ENV=production
+ENV PORT=3003
 RUN corepack enable && corepack prepare pnpm@10.26.2 --activate
 COPY --from=installer /app .
 
