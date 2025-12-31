@@ -42,11 +42,11 @@ export default function Login({}) {
   return (
     <div className="min-h-screen bg-background flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <a target="_blank" href="https://peppermint.sh/">
+        <a target="_blank" href={process.env.BASE_URL ?? "https://pepperminto.dev"}>
           <img
             className="mx-auto h-36 w-auto"
             src="/login.svg"
-            alt="peppermint.sh logo"
+            alt="pepperminto.dev logo"
           />
         </a>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-foreground">
@@ -110,7 +110,7 @@ export default function Login({}) {
             Built with 💚 by Pepperminto Labs
           </span>
           <a
-            href="https://docs.peppermint.sh/"
+            href={process.env.DOCS_URL ?? "https://docs.pepperminto.dev"}
             target="_blank"
             className="text-foreground"
           >

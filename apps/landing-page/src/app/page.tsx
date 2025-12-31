@@ -1,5 +1,13 @@
 import Link from "next/link";
 
+const BASE_URL = process.env.BASE_URL ?? "https://pepperminto.dev";
+const DOCS_URL = process.env.DOCS_URL ?? "https://docs.pepperminto.dev";
+const HELP_URL = process.env.HELP_URL ?? "https://help.demo.pepperminto.dev";
+const KNOWLEDGE_BASE_URL =
+  process.env.KNOWLEDGE_BASE_URL ?? "https://demo.pepperminto.dev";
+const DASHBOARD_URL =
+  process.env.DASHBOARD_URL ?? "https://dashboard.demo.pepperminto.dev";
+
 const highlights = [
   {
     title: "Unified command center",
@@ -67,6 +75,9 @@ export default function LandingPage() {
           <Link href="#faq" className="hover:text-emerald-900">
             FAQ
           </Link>
+          <Link href={HELP_URL} className="hover:text-emerald-900">
+            Help Center
+          </Link>
           <Link
             href="https://github.com/nulldoubt/Pepperminto"
             className="hover:text-emerald-900"
@@ -76,7 +87,7 @@ export default function LandingPage() {
         </nav>
         <div className="hidden md:flex">
           <Link
-            href="https://docs.pepperminto.sh"
+            href={DOCS_URL}
             className="rounded-full bg-emerald-900 px-4 py-2 text-sm font-semibold text-emerald-50 shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
           >
             Read the docs
@@ -106,14 +117,14 @@ export default function LandingPage() {
                 View the repo
               </Link>
               <Link
-                href="https://docs.pepperminto.sh"
+                href={DASHBOARD_URL}
                 className="inline-flex items-center justify-center rounded-full border border-emerald-900/30 px-6 py-3 text-sm font-semibold text-emerald-900 transition hover:border-emerald-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
               >
-                Get deployment steps
+                View the demo
               </Link>
             </div>
           </div>
-          <div className="rounded-3xl border border-emerald-900/10 bg-[linear-gradient(135deg,#0f172a,rgba(15,118,110,0.15))] p-8 text-emerald-50 shadow-soft">
+          <div className="rounded-3xl border border-emerald-200/20 bg-[linear-gradient(135deg,#0f172a,rgba(15,118,110,0.15))] p-8 text-emerald-50 shadow-soft">
             <p className="text-xs uppercase tracking-[0.3em] text-emerald-200/70">
               Production ready
             </p>
@@ -255,7 +266,7 @@ export default function LandingPage() {
             </h2>
               </div>
               <Link
-                href="https://docs.pepperminto.sh"
+                href={DOCS_URL}
                 className="inline-flex items-center justify-center rounded-full bg-emerald-900 px-6 py-3 text-sm font-semibold text-emerald-50 shadow-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
               >
                 Read the docs
@@ -292,10 +303,10 @@ export default function LandingPage() {
             <Link href="https://github.com/nulldoubt/Pepperminto" className="hover:text-emerald-900">
               GitHub
             </Link>
-            <Link href="https://docs.pepperminto.sh" className="hover:text-emerald-900">
+            <Link href={DOCS_URL} className="hover:text-emerald-900">
               Documentation
             </Link>
-            <Link href="https://pepperminto.sh" className="hover:text-emerald-900">
+            <Link href={BASE_URL} className="hover:text-emerald-900">
               Website
             </Link>
           </div>

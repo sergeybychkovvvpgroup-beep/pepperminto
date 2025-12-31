@@ -14,8 +14,10 @@ const sourceSans = Source_Sans_3({
   display: "swap",
 });
 
+const BASE_URL = process.env.BASE_URL ?? "https://pepperminto.dev";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://pepperminto.sh"),
+  metadataBase: new URL(BASE_URL),
   title: "Pepperminto — Calm support, fast resolution",
   description:
     "Pepperminto is the open-source helpdesk for teams who want clarity, speed, and a public knowledge base that stays in sync with every ticket.",
@@ -24,7 +26,7 @@ export const metadata: Metadata = {
     description:
       "A modern, open-source helpdesk with a public knowledge base and a refined admin experience.",
     images: ["/og-image.png"],
-    url: "https://pepperminto.sh",
+    url: BASE_URL,
   },
   twitter: {
     card: "summary_large_image",

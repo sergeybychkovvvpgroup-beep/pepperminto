@@ -4,8 +4,10 @@ import { getPageMap } from 'nextra/page-map'
 import type { Metadata } from 'next'
 import 'nextra-theme-docs/style.css'
  
+const DOCS_URL = process.env.DOCS_URL ?? "https://docs.pepperminto.dev";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://pepperminto.sh"),
+  metadataBase: new URL(DOCS_URL),
   title: {
     template: "Pepperminto",
     default: "Pepperminto - Revolutionizing Customer Support for Rapid Resolutions. Your Premier Zendesk Alternative.",
@@ -13,7 +15,7 @@ export const metadata: Metadata = {
   description: "Pepperminto is an open-source helpdesk focused on fast workflows, clear ownership, and reliable customer support.",
   openGraph: {
     images: "/og-image.png",
-    url: "https://pepperminto.sh",
+    url: DOCS_URL,
   },
   manifest: "/site.webmanifest",
   icons: [
@@ -83,7 +85,7 @@ export default async function RootLayout({ children }) {
           content={
             typeof metadata.openGraph?.url === "string"
               ? metadata.openGraph.url
-              : metadata.openGraph?.url?.toString() ?? "https://pepperminto.sh"
+              : metadata.openGraph?.url?.toString() ?? DOCS_URL
           }
         />
         <meta name="twitter:card" content="summary_large_image" />

@@ -140,7 +140,7 @@ export default function NotificationsSettingsModal() {
                       name="reply"
                       id="reply"
                       className="bg-background/60"
-                      placeholder="noreply@peppermint.sh"
+                      placeholder="noreply@pepperminto.dev"
                       onChange={(e) => setReply(e.target.value)}
                     />
                   </div>

@@ -191,7 +191,7 @@ export default function Login({}) {
             Built with 💚 by Pepperminto Labs
           </span>
           <a
-            href="https://docs.peppermint.sh/"
+            href={process.env.DOCS_URL ?? "https://docs.pepperminto.dev"}
             target="_blank"
             className="text-foreground"
           >

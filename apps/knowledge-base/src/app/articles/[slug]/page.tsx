@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-const API_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+const API_URL = process.env.API_URL || "http://localhost:3001";
+const BASE_URL = process.env.BASE_URL || "https://pepperminto.dev";
+const HELP_URL = process.env.HELP_URL || "https://help.demo.pepperminto.dev";
 
 type Article = {
   title: string;
@@ -98,12 +99,17 @@ export default async function ArticlePage({
             Pepperminto Help Center
           </span>
         </Link>
-        <Link
-          href="/"
-          className="text-sm text-slate-300 hover:text-white"
-        >
-          Back to all articles
-        </Link>
+        <div className="flex items-center gap-4 text-sm text-slate-300">
+          <Link href="/" className="hover:text-white">
+            Back to all articles
+          </Link>
+          <Link href={HELP_URL} className="hover:text-white">
+            Contact support
+          </Link>
+          <Link href={BASE_URL} className="hover:text-white">
+            Main site
+          </Link>
+        </div>
       </header>
 
       <main className="mx-auto w-full max-w-4xl px-6 pb-16">

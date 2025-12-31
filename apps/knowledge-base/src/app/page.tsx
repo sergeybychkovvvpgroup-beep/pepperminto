@@ -1,7 +1,9 @@
 import Link from "next/link";
 
-const API_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+const API_URL = process.env.API_URL || "http://localhost:3001";
+const BASE_URL = process.env.BASE_URL || "https://pepperminto.dev";
+const DOCS_URL = process.env.DOCS_URL || "https://docs.pepperminto.dev";
+const HELP_URL = process.env.HELP_URL || "https://help.demo.pepperminto.dev";
 
 type Article = {
   id: string;
@@ -103,11 +105,14 @@ export default async function KnowledgeBasePage({
           </span>
         </Link>
         <nav className="hidden gap-6 text-sm text-slate-300 md:flex">
-          <a className="hover:text-white" href="https://peppermint.sh">
+          <a className="hover:text-white" href={BASE_URL}>
             Main Site
           </a>
-          <a className="hover:text-white" href="https://docs.peppermint.sh">
+          <a className="hover:text-white" href={DOCS_URL}>
             Docs
+          </a>
+          <a className="hover:text-white" href={HELP_URL}>
+            Help Center
           </a>
           <a className="hover:text-white" href="https://github.com/nulldoubt/Pepperminto">
             GitHub
@@ -258,7 +263,7 @@ export default async function KnowledgeBasePage({
                 help you fast.
               </p>
               <a
-                href="https://peppermint.sh"
+                href={HELP_URL}
                 className="mt-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-white hover:bg-white/20"
               >
                 Contact support

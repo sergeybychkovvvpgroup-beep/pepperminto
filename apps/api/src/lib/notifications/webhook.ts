@@ -17,6 +17,7 @@ export async function sendWebhookNotification(webhook: any, message: any) {
   if (!webhook.active) return;
 
   const url = webhook.url;
+  const baseUrl = process.env.BASE_URL ?? "https://pepperminto.dev";
 
   if (url.includes("discord.com")) {
     const discordMessage = {
@@ -29,10 +30,10 @@ export async function sendWebhookNotification(webhook: any, message: any) {
             text: "Issue ID: " + message.id,
           },
           author: {
-            name: "peppermint.sh",
+            name: "Pepperminto",
             icon_url:
               "https://avatars.githubusercontent.com/u/76014454?s=200&v=4",
-            url: "https://peppermint.sh/",
+            url: baseUrl,
           },
           fields: [
             {
