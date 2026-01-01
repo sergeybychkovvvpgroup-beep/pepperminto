@@ -7,6 +7,14 @@ import { useRouter } from "next/router";
 import { getCookie } from "cookies-next";
 import moment from "moment";
 import { useUser } from "../../store/session";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/shadcn/ui/table";
 
 export default function Home() {
   const router = useRouter();
@@ -81,51 +89,35 @@ export default function Home() {
                     {t("recent_tickets")}
                   </span>
                   <div className="-mx-4 sm:-mx-0 w-full">
-                    <table className="min-w-full divide-y divide-gray-300">
-                      <thead>
-                        <tr>
-                          <th
-                            scope="col"
-                            className="px-4 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white"
-                          >
+                    <Table className="min-w-full divide-y divide-gray-300">
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="px-4 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white">
                             {t("title")}
-                          </th>
-                          <th
-                            scope="col"
-                            className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white lg:table-cell"
-                          >
+                          </TableHead>
+                          <TableHead className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white lg:table-cell">
                             {t("priority")}
-                          </th>
-                          <th
-                            scope="col"
-                            className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white sm:table-cell"
-                          >
+                          </TableHead>
+                          <TableHead className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white sm:table-cell">
                             {t("status")}
-                          </th>
-                          <th
-                            scope="col"
-                            className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white"
-                          >
+                          </TableHead>
+                          <TableHead className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white">
                             {t("created")}
-                          </th>
-
-                          <th
-                            scope="col"
-                            className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white"
-                          >
+                          </TableHead>
+                          <TableHead className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white">
                             {t("assigned_to")}
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-gray-200">
+                          </TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody className="divide-y divide-gray-200">
                         {tickets !== undefined &&
                           tickets.slice(0, 10).map((item: any) => (
-                            <tr
+                            <TableRow
                               key={item.id}
                               className="hover:bg-accent/40 hover:cursor-pointer"
                               onClick={() => router.push(`/issue/${item.id}`)}
                             >
-                              <td className="sm:max-w-[280px] 2xl:max-w-[720px] truncate px-4 py-1 text-sm font-medium text-gray-900 dark:text-white">
+                              <TableCell className="sm:max-w-[280px] 2xl:max-w-[720px] truncate px-4 py-1 text-sm font-medium text-gray-900 dark:text-white">
                                 {item.title}
                                 <dl className="font-normal lg:hidden">
                                   <dt className="sr-only sm:hidden">Email</dt>
@@ -133,8 +125,8 @@ export default function Home() {
                                     {item.email}
                                   </dd>
                                 </dl>
-                              </td>
-                              <td className="hidden px-3 py-1 text-sm text-gray-500 lg:table-cell w-[64px]">
+                              </TableCell>
+                              <TableCell className="hidden px-3 py-1 text-sm text-gray-500 lg:table-cell w-[64px]">
                                 {item.priority === "Low" && (
                                   <span className="inline-flex w-full justify-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700  ring-1 ring-inset ring-blue-600/20">
                                     {item.priority}
@@ -150,8 +142,8 @@ export default function Home() {
                                     {item.priority}
                                   </span>
                                 )}
-                              </td>
-                              <td className="hidden px-3 py-1 text-sm text-gray-500 sm:table-cell w-[64px]">
+                              </TableCell>
+                              <TableCell className="hidden px-3 py-1 text-sm text-gray-500 sm:table-cell w-[64px]">
                                 {item.isComplete === true ? (
                                   <div>
                                     <span className="inline-flex items-center gap-x-1.5 rounded-md bg-red-100 px-2 py-1 text-xs font-medium text-red-700">
@@ -179,13 +171,13 @@ export default function Home() {
                                     </span>
                                   </>
                                 )}
-                              </td>
-                              <td className="px-3 py-1 text-sm text-gray-500 dark:text-white w-[110px]">
+                              </TableCell>
+                              <TableCell className="px-3 py-1 text-sm text-gray-500 dark:text-white w-[110px]">
                                 {moment(item.createdAt).format("DD/MM/YYYY")}
-                              </td>
-                              <td className="px-3 py-1 text-sm text-gray-500 w-[130px] dark:text-white truncate whitespace-nowrap">
+                              </TableCell>
+                              <TableCell className="px-3 py-1 text-sm text-gray-500 w-[130px] dark:text-white truncate whitespace-nowrap">
                                 {item.assignedTo ? item.assignedTo.name : "-"}
-                              </td>
+                              </TableCell>
                               {/* <td className="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                           <Menu
                             as="div"
@@ -356,10 +348,10 @@ export default function Home() {
                             </Transition>
                           </Menu>
                         </td> */}
-                            </tr>
+                            </TableRow>
                           ))}
-                      </tbody>
-                    </table>
+                      </TableBody>
+                    </Table>
                   </div>
                 </>
               )}

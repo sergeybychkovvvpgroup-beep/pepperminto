@@ -19,6 +19,14 @@ import {
   SelectValue,
 } from "@/shadcn/ui/select";
 import { Button } from "@/shadcn/ui/button";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/shadcn/ui/table";
 
 const fetchALLTIckets = async () => {
   const res = await fetch(`/api/v1/tickets/all/admin`, {
@@ -43,7 +51,7 @@ function DefaultColumnFilter({ column }: any) {
     />
   );
 }
-function Table({ columns, data }: any) {
+function TicketsTable({ columns, data }: any) {
   const [columnFilters, setColumnFilters] = React.useState([]);
   const table = useReactTable({
     data,
@@ -75,10 +83,10 @@ function Table({ columns, data }: any) {
     <div className="overflow-x-auto md:-mx-6 lg:-mx-8">
       <div className="py-2 align-middle inline-block min-w-full md:px-6 lg:px-8">
         <div className="overflow-hidden rounded-lg border border-border/60 bg-card/80 shadow-sm">
-          <table className="min-w-full divide-y divide-border/60">
-            <thead className="bg-muted/40">
+          <Table className="min-w-full divide-y divide-border/60">
+            <TableHeader className="bg-muted/40">
               {table.getHeaderGroups().map((headerGroup) => (
-                <tr key={headerGroup.id}>
+                <TableRow key={headerGroup.id}>
                   {headerGroup.headers.map((header) => {
                     const hideHeader =
                       (header.column.columnDef as { hideHeader?: boolean })
@@ -87,7 +95,7 @@ function Table({ columns, data }: any) {
                       return null;
                     }
                     return (
-                      <th
+                      <TableHead
                         key={header.id}
                         className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider"
                       >
@@ -102,17 +110,17 @@ function Table({ columns, data }: any) {
                             <DefaultColumnFilter column={header.column} />
                           ) : null}
                         </div>
-                      </th>
+                      </TableHead>
                     );
                   })}
-                </tr>
+                </TableRow>
               ))}
-            </thead>
-            <tbody>
+            </TableHeader>
+            <TableBody>
               {table.getRowModel().rows.map((row) => (
-                <tr key={row.id} className="border-b border-border/60">
+                <TableRow key={row.id} className="border-b border-border/60">
                   {row.getVisibleCells().map((cell) => (
-                    <td
+                    <TableCell
                       key={cell.id}
                       className="px-6 py-4 whitespace-nowrap text-sm font-medium text-foreground"
                     >
@@ -120,12 +128,12 @@ function Table({ columns, data }: any) {
                         cell.column.columnDef.cell,
                         cell.getContext()
                       )}
-                    </td>
+                    </TableCell>
                   ))}
-                </tr>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
 
           {data.length > 10 && (
             <nav
@@ -322,7 +330,7 @@ export default function Clients() {
                   {data.tickets && data.tickets.length > 0 && (
                     <>
                       <div className="hidden sm:block ">
-                        <Table columns={columns} data={data.tickets} />
+                    <TicketsTable columns={columns} data={data.tickets} />
                       </div>
 
                       <div className="sm:hidden">

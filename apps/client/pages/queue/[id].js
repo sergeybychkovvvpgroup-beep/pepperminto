@@ -19,6 +19,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/shadcn/ui/select";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/shadcn/ui/table";
 
 // import MarkdownPreview from "../MarkdownPreview";
 import TicketsMobileList from "../../components/TicketsMobileList";
@@ -37,7 +45,7 @@ function DefaultColumnFilter({ column }) {
   );
 }
 
-function Table({ columns, data }) {
+function QueueTable({ columns, data }) {
   const [columnFilters, setColumnFilters] = React.useState([]);
   const table = useReactTable({
     data,
@@ -69,17 +77,17 @@ function Table({ columns, data }) {
     <div className="overflow-x-auto md:-mx-6 lg:-mx-8">
       <div className="py-2 align-middle inline-block min-w-full md:px-6 lg:px-8">
         <div className="overflow-hidden rounded-lg border border-border/60 bg-card/80 shadow-sm">
-          <table className="min-w-full divide-y divide-border/60">
-            <thead className="bg-muted/40">
+          <Table className="min-w-full divide-y divide-border/60">
+            <TableHeader className="bg-muted/40">
               {table.getHeaderGroups().map((headerGroup) => (
-                <tr key={headerGroup.id}>
+                <TableRow key={headerGroup.id}>
                   {headerGroup.headers.map((header) => {
                     const hideHeader = header.column.columnDef?.hideHeader === false;
                     if (hideHeader) {
                       return null;
                     }
                     return (
-                      <th
+                      <TableHead
                         key={header.id}
                         className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider"
                       >
@@ -94,17 +102,17 @@ function Table({ columns, data }) {
                             <DefaultColumnFilter column={header.column} />
                           ) : null}
                         </div>
-                      </th>
+                      </TableHead>
                     );
                   })}
-                </tr>
+                </TableRow>
               ))}
-            </thead>
-            <tbody>
+            </TableHeader>
+            <TableBody>
               {table.getRowModel().rows.map((row) => (
-                <tr key={row.id} className="border-b border-border/60">
+                <TableRow key={row.id} className="border-b border-border/60">
                   {row.getVisibleCells().map((cell) => (
-                    <td
+                    <TableCell
                       key={cell.id}
                       className="px-6 py-4 whitespace-nowrap text-sm font-medium text-foreground"
                     >
@@ -112,12 +120,12 @@ function Table({ columns, data }) {
                         cell.column.columnDef.cell,
                         cell.getContext()
                       )}
-                    </td>
+                    </TableCell>
                   ))}
-                </tr>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
 
           <nav
             className="flex items-center justify-between border-t border-border/60 bg-card/70 px-4 py-3 sm:px-6"
@@ -263,7 +271,7 @@ export default function AssignedTickets() {
           {data.tickets && (
             <>
               <div className="hidden sm:block">
-                <Table columns={columns} data={data.tickets} />
+                <QueueTable columns={columns} data={data.tickets} />
               </div>
 
               <div className="sm:hidden">

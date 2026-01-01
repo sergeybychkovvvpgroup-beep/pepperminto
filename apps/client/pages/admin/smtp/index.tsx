@@ -17,6 +17,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/shadcn/ui/select";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/shadcn/ui/table";
 import { ExclamationTriangleIcon } from "@heroicons/react/20/solid";
 import { getCookie } from "cookies-next";
 import { useRouter } from "next/router";
@@ -172,24 +180,35 @@ export default function Notifications() {
 
                       <div className="mt-4">
                         <h1>Email Templates</h1>
-                        <table>
-                          <tbody>
+                        <Table className="min-w-full">
+                          <TableHeader>
+                            <TableRow>
+                              <TableHead>Type</TableHead>
+                              <TableHead>Subject</TableHead>
+                              <TableHead>Preview</TableHead>
+                              <TableHead />
+                            </TableRow>
+                          </TableHeader>
+                          <TableBody>
                             {templates.map((template) => (
-                              <tr key={template.id}>
-                                <td>{template.type}</td>
-                                <td>{template.subject}</td>
-                                <td>{template.html}</td>
-                                <td>
+                              <TableRow key={template.id}>
+                                <TableCell>{template.type}</TableCell>
+                                <TableCell>{template.subject}</TableCell>
+                                <TableCell className="max-w-[420px] truncate text-muted-foreground">
+                                  {template.html}
+                                </TableCell>
+                                <TableCell className="text-right">
                                   <a
                                     href={`/admin/smtp/templates/${template.id}`}
+                                    className="text-sm font-semibold text-primary hover:underline"
                                   >
                                     Edit
                                   </a>
-                                </td>
-                              </tr>
+                                </TableCell>
+                              </TableRow>
                             ))}
-                          </tbody>
-                        </table>
+                          </TableBody>
+                        </Table>
                       </div>
                     </div>
                   ) : (

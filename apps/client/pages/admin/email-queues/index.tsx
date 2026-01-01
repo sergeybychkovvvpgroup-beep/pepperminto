@@ -1,6 +1,14 @@
 import { getCookie } from "cookies-next";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/shadcn/ui/table";
 
 export default function EmailQueues() {
   const [queues, setQueues]: any = useState();
@@ -64,39 +72,28 @@ export default function EmailQueues() {
               </div>
               <div className="-mx-4 mt-8 sm:-mx-0">
                 {queues && queues.length > 0 && (
-                  <table className="min-w-full divide-y divide-gray-300">
-                    <thead>
-                      <tr>
-                        <th
-                          scope="col"
-                          className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
-                        >
+                  <Table className="min-w-full divide-y divide-gray-300">
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
                           Name
-                        </th>
-                        <th
-                          scope="col"
-                          className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell"
-                        >
+                        </TableHead>
+                        <TableHead className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell">
                           Email/Username
-                        </th>
-                        <th
-                          scope="col"
-                          className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell"
-                        >
+                        </TableHead>
+                        <TableHead className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell">
                           Hostname
-                        </th>
-                        <th
-                          scope="col"
-                          className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                        >
+                        </TableHead>
+                        <TableHead className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                           Port
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-200">
-                      {queues && queues.map((item) => (
-                        <tr key={item.id}>
-                          <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-0">
+                        </TableHead>
+                        <TableHead className="px-3 py-3.5 text-right text-sm font-semibold text-gray-900" />
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody className="divide-y divide-gray-200">
+                      {queues.map((item) => (
+                        <TableRow key={item.id}>
+                          <TableCell className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none sm:pl-0">
                             {item.name}
                             <dl className="font-normal lg:hidden">
                               <dt className="sr-only">Title</dt>
@@ -108,17 +105,17 @@ export default function EmailQueues() {
                                 {item.hostname}
                               </dd>
                             </dl>
-                          </td>
-                          <td className="hidden px-3 py-4 text-sm  lg:table-cell">
+                          </TableCell>
+                          <TableCell className="hidden px-3 py-4 text-sm  lg:table-cell">
                             {item.username}
-                          </td>
-                          <td className="hidden px-3 py-4 text-sm  sm:table-cell">
+                          </TableCell>
+                          <TableCell className="hidden px-3 py-4 text-sm  sm:table-cell">
                             {item.hostname}
-                          </td>
-                          <td className="px-3 py-4 text-sm ">
+                          </TableCell>
+                          <TableCell className="px-3 py-4 text-sm ">
                             {item.tls ? "993" : "110"}
-                          </td>
-                          <td className="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                          </TableCell>
+                          <TableCell className="py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                             <button
                               type="button"
                               onClick={() => deleteItem(item.id)}
@@ -126,11 +123,11 @@ export default function EmailQueues() {
                             >
                               Delete
                             </button>
-                          </td>
-                        </tr>
+                          </TableCell>
+                        </TableRow>
                       ))}
-                    </tbody>
-                  </table>
+                    </TableBody>
+                  </Table>
                 )}
               </div>
             </div>
