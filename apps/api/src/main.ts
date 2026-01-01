@@ -6,6 +6,7 @@ import Fastify, { FastifyInstance } from "fastify";
 import multer from "fastify-multer";
 import { exec } from "child_process";
 import fs from "fs";
+import path from "path";
 import { track } from "./lib/hog";
 import { getEmails } from "./lib/imap";
 import { checkToken } from "./lib/jwt";
@@ -178,18 +179,23 @@ server.register(async (app) => {
 const start = async () => {
   try {
     // Run prisma generate and migrate commands before starting the server
-    const prismaBin = process.env.PRISMA_CLI_PATH;
-    const prismaCmd =
-      prismaBin && fs.existsSync(prismaBin)
-        ? prismaBin
-        : "node ./apps/api/node_modules/prisma/build/index.js";
+    const prismaCwd = process.env.PRISMA_CWD
+      ? path.resolve(process.env.PRISMA_CWD)
+      : path.resolve(process.cwd(), "apps/api");
+    const prismaBin = process.env.PRISMA_CLI_PATH
+      ? path.resolve(process.env.PRISMA_CLI_PATH)
+      : path.join(prismaCwd, "node_modules/.bin/prisma");
+    const prismaCmd = fs.existsSync(prismaBin)
+      ? prismaBin
+      : `node ${path.join(prismaCwd, "node_modules/prisma/build/index.js")}`;
     const prismaSchema =
       process.env.PRISMA_SCHEMA_PATH ??
-      "./apps/api/src/prisma/schema.prisma";
+      path.join(prismaCwd, "src/prisma/schema.prisma");
 
     await new Promise<void>((resolve, reject) => {
       exec(
         `${prismaCmd} migrate deploy --schema ${prismaSchema}`,
+        { cwd: prismaCwd, env: process.env },
         (err, stdout, stderr) => {
           if (err) {
             console.error(err);
@@ -200,6 +206,7 @@ const start = async () => {
 
           exec(
             `${prismaCmd} generate --schema ${prismaSchema}`,
+            { cwd: prismaCwd, env: process.env },
             (err, stdout, stderr) => {
               if (err) {
                 console.error(err);
@@ -212,6 +219,7 @@ const start = async () => {
 
           exec(
             `${prismaCmd} db seed --schema ${prismaSchema}`,
+            { cwd: prismaCwd, env: process.env },
             (err, stdout, stderr) => {
               if (err) {
                 console.error(err);
