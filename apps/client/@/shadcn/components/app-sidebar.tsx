@@ -54,7 +54,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     teams: [
       {
         name: "Pepperminto",
-        plan: `version: ${process.env.NEXT_PUBLIC_CLIENT_VERSION}`,
+        plan: "version: 0.1.2",
       },
     ],
     navMain: location.pathname.startsWith("/admin")
@@ -256,7 +256,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               Pepperminto
             </span>
             <span className="truncate text-xs text-muted-foreground">
-              version: {process.env.NEXT_PUBLIC_CLIENT_VERSION}
+              version: 0.1.2
             </span>
           </div>
         </div>
