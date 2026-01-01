@@ -93,7 +93,7 @@ export default function ShadLayout({ children }: any) {
                       >
                         <Button
                           variant="outline"
-                          className="border-border/60 bg-background/70 text-foreground shadow-sm backdrop-blur hover:bg-accent/50"
+                          className="h-9 border-border/60 bg-background/70 text-foreground shadow-sm backdrop-blur hover:bg-accent hover:text-accent-foreground"
                         >
                           Send Feedback
                         </Button>

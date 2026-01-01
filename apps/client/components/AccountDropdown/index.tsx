@@ -57,7 +57,11 @@ export function AccountDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm" className="h-[32px]">
+        <Button
+          variant="outline"
+          size="sm"
+          className="h-9 border-border/60 bg-background/70 px-3 text-foreground shadow-sm backdrop-blur hover:bg-accent hover:text-accent-foreground"
+        >
           {user.name}
         </Button>
       </DropdownMenuTrigger>
