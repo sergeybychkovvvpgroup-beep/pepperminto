@@ -147,7 +147,7 @@ server.register(async (app) => {
       info: {
         title: "Pepperminto API",
         description: "Pepperminto API documentation",
-        version: "1.0.0",
+        version: "0.1.2",
       },
       servers: [
         {
