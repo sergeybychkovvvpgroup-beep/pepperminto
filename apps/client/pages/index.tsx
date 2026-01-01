@@ -180,7 +180,7 @@ export default function Home() {
                         <tr>
                           <th
                             scope="col"
-                            className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 dark:text-white sm:pl-0"
+                            className="px-4 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-white"
                           >
                             {t("title")}
                           </th>
@@ -219,7 +219,7 @@ export default function Home() {
                               className="hover:bg-accent/40 hover:cursor-pointer"
                               onClick={() => router.push(`/issue/${item.id}`)}
                             >
-                              <td className="sm:max-w-[280px] 2xl:max-w-[720px] truncate py-1 pl-4 pr-3 text-sm font-medium text-gray-900 dark:text-white sm:pl-0">
+                              <td className="sm:max-w-[280px] 2xl:max-w-[720px] truncate px-4 py-1 text-sm font-medium text-gray-900 dark:text-white">
                                 {item.title}
                                 <dl className="font-normal lg:hidden">
                                   <dt className="sr-only sm:hidden">Email</dt>
