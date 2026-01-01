@@ -94,7 +94,7 @@ export default function LandingPage() {
         </div>
       </header>
 
-      <main className="mx-auto w-full max-w-6xl px-6 pb-16">
+      <main className="mx-auto w-full max-w-6xl px-6 pb-24">
         <section className="grid gap-10 py-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div className="space-y-6">
             <p className="text-xs font-semibold uppercase tracking-[0.4em] text-emerald-900/70">
@@ -260,9 +260,9 @@ export default function LandingPage() {
                 <p className="text-xs uppercase tracking-[0.3em] text-emerald-900/60">
                   FAQ
                 </p>
-            <h2 className="mt-3 text-2xl font-semibold text-emerald-950">
-              Ready to roll Pepperminto out?
-            </h2>
+                <h2 className="mt-3 text-2xl font-semibold text-emerald-950">
+                  Ready to roll Pepperminto out?
+                </h2>
               </div>
               <Link
                 href={DOCS_URL}
@@ -291,6 +291,30 @@ export default function LandingPage() {
             </div>
           </div>
         </section>
+
+        <section className="py-10">
+          <div className="rounded-3xl border border-emerald-900/10 bg-white/70 p-8 shadow-soft">
+            <p className="text-xs uppercase tracking-[0.3em] text-emerald-900/60">
+              License
+            </p>
+            <h2 className="mt-3 text-2xl font-semibold text-emerald-950">
+              Open-source, fork-friendly.
+            </h2>
+            <p
+              className="mt-3 text-sm text-emerald-900/70"
+              style={{ fontFamily: "var(--font-body)" }}
+            >
+              Pepperminto is MIT-licensed. You can self-host, extend, and fork
+              it freely—just keep the license and attribution intact.
+            </p>
+            <Link
+              href="https://github.com/nulldoubt/Pepperminto/blob/main/LICENSE"
+              className="mt-4 inline-flex items-center text-sm font-semibold text-emerald-900 underline-offset-4 hover:underline"
+            >
+              Read the MIT license
+            </Link>
+          </div>
+        </section>
       </main>
 
       <footer className="border-t border-emerald-900/10 bg-white/60">
@@ -305,8 +329,8 @@ export default function LandingPage() {
             <Link href={DOCS_URL} className="hover:text-emerald-900">
               Documentation
             </Link>
-            <Link href={BASE_URL} className="hover:text-emerald-900">
-              Website
+            <Link href={KNOWLEDGE_BASE_URL} className="hover:text-emerald-900">
+              Knowledge Base
             </Link>
           </div>
         </div>
