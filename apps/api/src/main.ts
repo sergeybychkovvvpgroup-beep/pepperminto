@@ -4,7 +4,7 @@ import swaggerUI from "@fastify/swagger-ui";
 import "dotenv/config";
 import Fastify, { FastifyInstance } from "fastify";
 import multer from "fastify-multer";
-import { exec } from "child_process";
+import { execFile } from "child_process";
 import fs from "fs";
 import path from "path";
 import { track } from "./lib/hog";
@@ -179,9 +179,12 @@ server.register(async (app) => {
 const start = async () => {
   try {
     // Run prisma generate and migrate commands before starting the server
+    const cwd = process.cwd();
     const prismaCwd = process.env.PRISMA_CWD
       ? path.resolve(process.env.PRISMA_CWD)
-      : path.resolve(process.cwd(), "apps/api");
+      : cwd.endsWith(`${path.sep}apps${path.sep}api`)
+      ? cwd
+      : path.resolve(cwd, "apps/api");
     const prismaBin = process.env.PRISMA_CLI_PATH
       ? path.resolve(process.env.PRISMA_CLI_PATH)
       : path.join(prismaCwd, "node_modules/.bin/prisma");
@@ -193,8 +196,9 @@ const start = async () => {
       path.join(prismaCwd, "src/prisma/schema.prisma");
 
     await new Promise<void>((resolve, reject) => {
-      exec(
-        `${prismaCmd} migrate deploy --schema ${prismaSchema}`,
+      execFile(
+        prismaCmd,
+        ["migrate", "deploy", "--schema", prismaSchema],
         { cwd: prismaCwd, env: process.env },
         (err, stdout, stderr) => {
           if (err) {
@@ -204,8 +208,9 @@ const start = async () => {
           console.log(stdout);
           console.error(stderr);
 
-          exec(
-            `${prismaCmd} generate --schema ${prismaSchema}`,
+          execFile(
+            prismaCmd,
+            ["generate", "--schema", prismaSchema],
             { cwd: prismaCwd, env: process.env },
             (err, stdout, stderr) => {
               if (err) {
@@ -217,8 +222,9 @@ const start = async () => {
             }
           );
 
-          exec(
-            `${prismaCmd} db seed --schema ${prismaSchema}`,
+          execFile(
+            prismaCmd,
+            ["db", "seed", "--schema", prismaSchema],
             { cwd: prismaCwd, env: process.env },
             (err, stdout, stderr) => {
               if (err) {
