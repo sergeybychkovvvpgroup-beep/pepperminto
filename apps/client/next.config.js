@@ -13,7 +13,6 @@ module.exports = nextTranslate(
       BASE_URL: process.env.BASE_URL,
       DASHBOARD_URL: process.env.DASHBOARD_URL,
       DOCS_URL: process.env.DOCS_URL,
-      HELP_URL: process.env.HELP_URL,
       KNOWLEDGE_BASE_URL: process.env.KNOWLEDGE_BASE_URL,
     },
     async rewrites() {

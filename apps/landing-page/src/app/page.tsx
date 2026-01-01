@@ -2,7 +2,6 @@ import Link from "next/link";
 
 const BASE_URL = process.env.BASE_URL ?? "https://pepperminto.dev";
 const DOCS_URL = process.env.DOCS_URL ?? "https://docs.pepperminto.dev";
-const HELP_URL = process.env.HELP_URL ?? "https://help.demo.pepperminto.dev";
 const KNOWLEDGE_BASE_URL =
   process.env.KNOWLEDGE_BASE_URL ?? "https://demo.pepperminto.dev";
 const DASHBOARD_URL =
@@ -75,8 +74,8 @@ export default function LandingPage() {
           <Link href="#faq" className="hover:text-emerald-900">
             FAQ
           </Link>
-          <Link href={HELP_URL} className="hover:text-emerald-900">
-            Help Center
+          <Link href={KNOWLEDGE_BASE_URL} className="hover:text-emerald-900">
+            Knowledge Base
           </Link>
           <Link
             href="https://github.com/nulldoubt/Pepperminto"

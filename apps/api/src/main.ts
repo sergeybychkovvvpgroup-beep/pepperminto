@@ -179,34 +179,49 @@ server.register(async (app) => {
 const start = async () => {
   try {
     // Run prisma generate and migrate commands before starting the server
+    const prismaCmd =
+      process.env.PRISMA_CLI_PATH ?? "./node_modules/.bin/prisma";
+    const prismaSchema =
+      process.env.PRISMA_SCHEMA_PATH ??
+      "./apps/api/src/prisma/schema.prisma";
+
     await new Promise<void>((resolve, reject) => {
-      exec("npx prisma migrate deploy", (err, stdout, stderr) => {
-        if (err) {
-          console.error(err);
-          reject(err);
+      exec(
+        `${prismaCmd} migrate deploy --schema ${prismaSchema}`,
+        (err, stdout, stderr) => {
+          if (err) {
+            console.error(err);
+            reject(err);
+          }
+          console.log(stdout);
+          console.error(stderr);
+
+          exec(
+            `${prismaCmd} generate --schema ${prismaSchema}`,
+            (err, stdout, stderr) => {
+              if (err) {
+                console.error(err);
+                reject(err);
+              }
+              console.log(stdout);
+              console.error(stderr);
+            }
+          );
+
+          exec(
+            `${prismaCmd} db seed --schema ${prismaSchema}`,
+            (err, stdout, stderr) => {
+              if (err) {
+                console.error(err);
+                reject(err);
+              }
+              console.log(stdout);
+              console.error(stderr);
+              resolve();
+            }
+          );
         }
-        console.log(stdout);
-        console.error(stderr);
-
-        exec("npx prisma generate", (err, stdout, stderr) => {
-          if (err) {
-            console.error(err);
-            reject(err);
-          }
-          console.log(stdout);
-          console.error(stderr);
-        });
-
-        exec("npx prisma db seed", (err, stdout, stderr) => {
-          if (err) {
-            console.error(err);
-            reject(err);
-          }
-          console.log(stdout);
-          console.error(stderr);
-          resolve();
-        });
-      });
+      );
     });
 
     // connect to database

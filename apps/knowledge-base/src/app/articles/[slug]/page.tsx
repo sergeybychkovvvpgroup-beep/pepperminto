@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 
 const API_URL = process.env.API_URL || "http://localhost:3001";
 const BASE_URL = process.env.BASE_URL || "https://pepperminto.dev";
-const HELP_URL = process.env.HELP_URL || "https://help.demo.pepperminto.dev";
+const DASHBOARD_URL =
+  process.env.DASHBOARD_URL || "https://dashboard.demo.pepperminto.dev";
 
 type Article = {
   title: string;
@@ -103,7 +104,7 @@ export default async function ArticlePage({
           <Link href="/" className="hover:text-white">
             Back to all articles
           </Link>
-          <Link href={HELP_URL} className="hover:text-white">
+          <Link href={DASHBOARD_URL} className="hover:text-white">
             Contact support
           </Link>
           <Link href={BASE_URL} className="hover:text-white">
