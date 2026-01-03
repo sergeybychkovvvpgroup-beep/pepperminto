@@ -54,7 +54,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     teams: [
       {
         name: "Pepperminto",
-        plan: "version: 0.1.2",
+        plan: "version: 0.1.3",
       },
     ],
     navMain: location.pathname.startsWith("/admin")
