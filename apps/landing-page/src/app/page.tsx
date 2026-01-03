@@ -1,4 +1,5 @@
 import Link from "next/link";
+import MobileMenu from "../components/mobile-menu";
 
 const BASE_URL = process.env.BASE_URL ?? "https://pepperminto.dev";
 const DOCS_URL = process.env.DOCS_URL ?? "https://docs.pepperminto.dev";
@@ -92,6 +93,10 @@ export default function LandingPage() {
             Read the docs
           </Link>
         </div>
+        <MobileMenu
+          docsUrl={DOCS_URL}
+          knowledgeBaseUrl={KNOWLEDGE_BASE_URL}
+        />
       </header>
 
       <main className="mx-auto w-full max-w-6xl px-6 pb-24">
