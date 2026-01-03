@@ -34,4 +34,4 @@ RUN corepack enable && corepack prepare pnpm@10.26.2 --activate
 COPY --from=installer /app .
 
 EXPOSE 3002
-CMD ["node", "apps/client/.next/standalone/server.js"]
+CMD ["node", "apps/client/.next/standalone/apps/client/server.js"]
