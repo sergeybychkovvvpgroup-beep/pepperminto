@@ -1,4 +1,5 @@
 import Link from "next/link";
+import CreateTicketModal from "../components/create-ticket-modal";
 import ThemeToggle from "../components/theme-toggle";
 
 const API_URL = process.env.API_URL || "http://localhost:3001";
@@ -268,12 +269,7 @@ export default async function KnowledgeBasePage({
                 If you can&apos;t find what you need, open a ticket and we&apos;ll
                 help you fast.
               </p>
-              <a
-                href={DASHBOARD_URL}
-                className="mt-4 inline-flex items-center gap-2 rounded-full bg-teal-500 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-400 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
-              >
-                Contact support
-              </a>
+              <CreateTicketModal />
             </div>
           </aside>
         </div>

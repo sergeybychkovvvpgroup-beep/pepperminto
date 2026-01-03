@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import CreateTicketModal from "../../../components/create-ticket-modal";
 import ThemeToggle from "../../../components/theme-toggle";
 
 const API_URL = process.env.API_URL || "http://localhost:3001";
@@ -105,12 +106,9 @@ export default async function ArticlePage({
           <Link href="/" className="hover:text-slate-900 dark:hover:text-white">
             Back to all articles
           </Link>
-          <Link
-            href={DASHBOARD_URL}
-            className="hover:text-slate-900 dark:hover:text-white"
-          >
-            Contact support
-          </Link>
+          <CreateTicketModal
+            buttonClassName="rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-xs font-semibold text-slate-700 hover:border-teal-500 hover:text-teal-700 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200"
+          />
           <Link href={BASE_URL} className="hover:text-slate-900 dark:hover:text-white">
             Main site
           </Link>
