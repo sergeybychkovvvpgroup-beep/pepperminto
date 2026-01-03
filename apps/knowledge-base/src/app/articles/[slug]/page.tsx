@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import ThemeToggle from "../../../components/theme-toggle";
 
 const API_URL = process.env.API_URL || "http://localhost:3001";
 const BASE_URL = process.env.BASE_URL || "https://pepperminto.dev";
@@ -92,7 +93,7 @@ export default async function ArticlePage({
   const paragraphs = getParagraphs(article.content);
 
   return (
-    <div className="min-h-screen bg-grid text-slate-100">
+    <div className="min-h-screen bg-grid text-slate-900 dark:text-slate-100">
       <header className="mx-auto flex w-full max-w-4xl items-center justify-between px-6 py-8">
         <Link href="/" className="flex items-center gap-3">
           <span className="text-2xl">🍵</span>
@@ -100,34 +101,35 @@ export default async function ArticlePage({
             Pepperminto Help Center
           </span>
         </Link>
-        <div className="flex items-center gap-4 text-sm text-slate-300">
-          <Link href="/" className="hover:text-white">
+        <div className="flex items-center gap-4 text-sm text-slate-600 dark:text-slate-300">
+          <Link href="/" className="hover:text-slate-900 dark:hover:text-white">
             Back to all articles
           </Link>
-          <Link href={DASHBOARD_URL} className="hover:text-white">
+          <Link href={DASHBOARD_URL} className="hover:text-slate-900 dark:hover:text-white">
             Contact support
           </Link>
-          <Link href={BASE_URL} className="hover:text-white">
+          <Link href={BASE_URL} className="hover:text-slate-900 dark:hover:text-white">
             Main site
           </Link>
+          <ThemeToggle />
         </div>
       </header>
 
       <main className="mx-auto w-full max-w-4xl px-6 pb-16">
-        <article className="rounded-3xl border border-slate-800 bg-slate-950/70 px-8 py-10 shadow-2xl shadow-teal-500/10">
-          <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.3em] text-teal-300">
+        <article className="rounded-3xl border border-slate-200 bg-white/80 px-8 py-10 shadow-2xl shadow-teal-500/10 dark:border-slate-800 dark:bg-slate-950/70">
+          <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.3em] text-teal-700 dark:text-teal-300">
             {(article.tags || []).length > 0
               ? article.tags.join(" • ")
               : "General"}
           </div>
-          <h1 className="mt-4 text-4xl font-semibold text-white md:text-5xl">
+          <h1 className="mt-4 text-4xl font-semibold text-slate-900 md:text-5xl dark:text-white">
             {article.title}
           </h1>
           <p className="mt-4 text-sm uppercase tracking-[0.3em] text-slate-500">
             Updated {formatDate(article.updatedAt)} · {article.author}
           </p>
 
-          <div className="mt-8 space-y-4 text-base leading-7 text-slate-200">
+          <div className="mt-8 space-y-4 text-base leading-7 text-slate-700 dark:text-slate-200">
             {paragraphs.map((line, index) => (
               <p key={index}>{line}</p>
             ))}
