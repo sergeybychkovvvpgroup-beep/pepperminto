@@ -6,7 +6,7 @@
 <p align="center">
     <img src="./static/logo.svg" alt="Logo" height="80px" >
 </p>
-
+Pepperminto Ticket Management 🍵
 Pepperminto is a community-maintained fork of Peppermint, focused on a clean, modern admin experience, a public knowledge base, and an updated monorepo workflow.
 
 ## ❤️ Fork credits
